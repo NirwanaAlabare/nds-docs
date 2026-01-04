@@ -54,7 +54,9 @@ class RoleMiddleWare
 
 Dan cara penggunaannya seperti ini:
 
-```php title="routes/web.php
+```php title="routes/web.php"
+...
+
 Route::controller(PartController::class)->prefix("part")->middleware('role:marker,cutting,stocker')->group(function () {
     Route::get('/', 'index')->name('part');
     Route::get('/create', 'create')->name('create-part');
@@ -63,6 +65,8 @@ Route::controller(PartController::class)->prefix("part")->middleware('role:marke
     Route::put('/update/{id?}', 'update')->name('update-part');
     Route::delete('/destroy/{id?}', 'destroy')->name('destroy-part');
 });
+
+...
 ```
 
 <code>middleware('role:marker,cutting,stocker')</code> adalah dimana middleware itu dipanggil. Artinya siapa saja yang punya role <code>marker</code>, <code>cutting</code>, atau <code>stocker</code> bisa mengakses rute tersebut. Kamu bisa memasukkan satu atau lebih role ke dalam <code>role:</code>.

@@ -1,4 +1,4 @@
-# Perkenalan
+# Permulaan
 
 Project NDS adalah project aplikasi berbasis website yang dibuat untuk tracking produksi garment. NDS saat ini berfokus pada modul :
 
