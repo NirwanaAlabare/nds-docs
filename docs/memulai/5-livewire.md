@@ -4,7 +4,7 @@ title: "Livewire"
 
 Livewire digunakan untuk beberapa komponen yang perlu tampilan dinamis. berikut contoh livewire sederhana :
 
-```php title="app\Http\Livewire\LineDashboardList"
+```php title="app\Http\Livewire\LineDashboardList.php"
 namespace App\Http\Livewire;
 
 use Livewire\Component;
@@ -42,7 +42,7 @@ class LineDashboardList extends Component
 }
 ```
 
-Untuk tampilannya berada di "<code>resources/views/livewire/...</code>".Contoh : 
+Untuk tampilannya berada di <code>resources/views/livewire/...</code> Contoh :
 
 ```php title="resources/views/livewire/sewing/line-dashboard-list.blade.php"
 <div>
@@ -61,7 +61,7 @@ Untuk tampilannya berada di "<code>resources/views/livewire/...</code>".Contoh :
 </div>
 ```
 
-Dan untuk memanggilnya di "<code>resources/views/...</code>" adalah sebagai berikut : 
+Dan cara untuk memanggilnya di <code>resources/views/...</code> ada di contoh berikut :
 
 ```php title="resources/views/sewing/dashboard-line.blade.php"
 @extends('layouts.index')
@@ -71,9 +71,11 @@ Dan untuk memanggilnya di "<code>resources/views/...</code>" adalah sebagai beri
         <div class="card">
             <div class="card-body">
                 <h3 class="card-title text-sb text-center fw-bold my-3">Line Dashboard List</h3>
-                @livewire('line-dashboard-list')
+                @livewire('line-dashboard-list') // This is how livewire component called
             </div>
         </div>
     </div>
 @endsection
 ```
+
+Untuk lebih lengkapnya ada di dokumentasi resmi livewire berikut : [Livewire v2 Docs](https://laravel-livewire.com/docs/2.x/quickstart).

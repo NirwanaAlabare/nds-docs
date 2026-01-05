@@ -14,53 +14,53 @@ Digunakan untuk mengkonfigurasi perilaku table, koneksi yang digunakan, relasi a
 
 ```php title="app\Models\SignalBit\MasterPlan.php"
 namespace App\Models\SignalBit;
- 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
+
 class MasterPlan extends Model
 {
     use HasFactory;
- 
+
     protected $connection = 'mysql_sb';
- 
+
     protected $table = 'master_plan';
- 
+
     protected $guarded = [];
- 
+
     public $timestamps = false;
- 
+
     public function userPassword()
     {
         return $this->belongsTo(UserLine::class, 'sewing_line', 'username');
     }
- 
+
     public function actCosting()
     {
         return $this->belongsTo(ActCosting::class, 'id_ws', 'id');
     }
- 
+
     // QC Endline
     public function rfts()
     {
         return $this->hasMany(Rft::class, 'master_plan_id', 'id');
     }
- 
+
     public function defects()
     {
         return $this->hasMany(Defect::class, 'master_plan_id', 'id');
     }
- 
+
     public function rejects()
     {
         return $this->hasMany(Reject::class, 'master_plan_id', 'id');
     }
- 
+
     public function reworks()
     {
         return $this->hasMany(Rework::class, 'master_plan_id', 'id');
     }
- 
+
     // QC Packing
     public function rftsPacking()
     {
@@ -193,9 +193,9 @@ Connection diatur dalam <code>config/database.php</code> :
 ],
 ```
 
-#### 2. View 
+#### 2. View
 
-Digunakan sebagai front-end dengan menggunakan **layout** seperti berikut : 
+Digunakan sebagai front-end dengan menggunakan **layout** seperti berikut :
 
 ```
 {{-- Page Configurations --}}
@@ -327,6 +327,7 @@ Digunakan sebagai front-end dengan menggunakan **layout** seperti berikut :
 ```
 
 Berikut contoh **penggunaan layout**nya :
+
 ```
 @extends('layouts.index')
 
@@ -341,7 +342,7 @@ Berikut contoh **penggunaan layout**nya :
 
 @section('content')
     <!-- Your Contents -->
-@endsection 
+@endsection
 
 @section('custom-script')
     <!-- Your Custom Javascript for front-end logics -->
@@ -356,13 +357,13 @@ Berikut contoh **penggunaan layout**nya :
 
 Untuk menaruh styling tambahan bisa di <code>@section("custom-link")</code>, dan script tambahan di <code>@section("script")</code>. Konten utama disimpan di <code>@section("content")</code>. Dan untuk mengirimkan request ke back-end menggunakan <b>JQuery ajax</b> diletakkan di <code>@section("custom-script")</code>
 
-#### 3. Controller 
+#### 3. Controller
 
 Controller digunakan sebagai back-end. Tempat untuk business logic. Bisa juga menggunakan service untuk fungsi yang digunakan berulang-kali dibanyak tempat.
 
 Contoh basic **Controller** :
 
-```php title='app\Http\Controllers\...'
+```php title='app\Http\Controllers...'
 namespace App\Http\Controllers;
 
 use App\Models\ExampleModel;
@@ -448,7 +449,7 @@ class Example extends Controller
 }
 ```
 
-Jika request-nya menggunakan ajax, biasanya Controller akan mengembalikan **array** dengan format seperti :
+Jika request-nya menggunakan ajax, biasanya Controller akan mengembalikan **array** dengan format seperti berikut :
 
 ```php
 return array(
@@ -458,7 +459,7 @@ return array(
 );
 ```
 
-Dan untuk **Datatables** : 
+Dan untuk **Datatables** :
 
 ```php
 use Yajra\DataTables\Facades\DataTables;

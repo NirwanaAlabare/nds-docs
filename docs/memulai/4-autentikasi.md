@@ -2,7 +2,7 @@
 title: "Autentikasi"
 ---
 
-Untuk pengaturan akses dalam Project ini menggunakan Middleware, terlihat seperti ini :
+Untuk pengaturan akses dalam Project ini menggunakan Middleware, seperti ini :
 
 ```php title="app\Http\RoleMiddleware.php"
 namespace App\Http\Middleware;
@@ -73,7 +73,7 @@ Route::controller(PartController::class)->prefix("part")->middleware('role:marke
 
 Untuk **blade if**, yang biasanya digunakan di front-end, kode nya seperti berikut :
 
-```php title="app/Providers/AppServiceProvider.php
+```php title="app/Providers/AppServiceProvider.php"
 Blade::if('role', function (...$roles) {
 $user = auth()->user();
 
@@ -102,7 +102,7 @@ if (in_array("superadmin", $roles)) {
 });
 ```
 
-Dan ini contoh penggunaannya : 
+Dan ini contoh penggunaannya :
 
 ```php title="resources/views/..."
 @role('stocker')
@@ -121,4 +121,4 @@ Dan ini contoh penggunaannya :
 @endrole
 ```
 
-<code>@role('namaAkses')</code> untuk mendefinisikan elemen yang hanya bisa dilihat oleh role tertentu. 
+<code>@role('namaAkses')</code> adalah kode yang mendefinisikan akses agar hanya user yang memiliki role tertentu yang dapat mengakses element tersebut.
