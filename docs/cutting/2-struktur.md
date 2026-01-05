@@ -2,9 +2,21 @@
 title: Struktur Data
 ---
 
-Modul Cutting berfokus pada tabel-tabel berikut ini :
+## Cutting Plan
 
-![Struktur Database Marker](/assets/images/struktur-database-cutting.png)
+Data untuk modul cutting plan akan berada di tabel berikut :
+
+### 1. cutting_plan
+
+Tabel untuk menampung tanggal cutting beserta form yang akan dialokasikan. Juga menampung status approve pada tiap form. Menggunakan kolom <code>form_cut_id</code> untuk penghubung ke tabel <code>form_cut_input</code>. Memiliki identifikasi dengan format <code>CP-ddmmyyyy</code>.
+
+![Struktur Database Cutting Plan](/assets/images/struktur-database-cutting-plan.png)
+
+## Form Cutting
+
+Modul untuk proses form cutting berfokus pada tabel-tabel berikut :
+
+![Struktur Database Cutting](/assets/images/struktur-database-cutting.png)
 
 ### 1. form_cut_input Table
 
@@ -20,8 +32,8 @@ Tabel **scanned_item** menampung data roll secara _unique_, beserta kolom **qty*
 
 ### 4. form_cut_reject Table
 
-Tabel **form_cut_reject** adalah varian lain dari <code>form_cut_input</code>. Berbeda dari form_cut_input, form_cut_reject tidak mencantumkan detail item di tabelnya. Tidak ada relasi ke marker, order dan semacamnya ditentukan langsung di modul **Form Cut Reject**. Seperti <code>buyer_id</code>, <code>act_costing_id</code>, <code>color</code>, <code>panel</code>, <code>group</code> dsb.
+Tabel **form_cut_reject** adalah varian lain dari <code>form_cut_input</code>. Berbeda dari form_cut_input, form_cut_reject tidak mencantumkan detail item di tabelnya. Tidak ada relasi ke marker. Untuk order dan semacamnya ditentukan langsung di modul **Form Cut Reject**. Seperti <code>buyer_id</code>, <code>act_costing_id</code>, <code>color</code>, <code>panel</code>, <code>group</code> dsb.
 
 ### 5. form_cut_reject_detail Table
 
-Merupakan tabel **child dari table form_cut_reject**. Isinya detail output aktual per <code>size</code>-nya. Digunakan kolom **form_cut_reject_detail.form_id** sebagai penghubung ke **form_cut_reject.id**.
+Merupakan tabel **child dari tabel form_cut_reject**. Isinya detail output aktual per-<code>size</code>-nya. Digunakan kolom **form_cut_reject_detail.form_id** sebagai penghubung ke **form_cut_reject.id**.
