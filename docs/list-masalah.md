@@ -1,6 +1,6 @@
 ---
 title: List Masalah
-sidebar_position: 100
+sidebar_position: 2
 ---
 
 Terdapat beberapa masalah dari modul-modul tadi yang mungkin perlu diperbaiki. Bisa di cek di link berikut,
