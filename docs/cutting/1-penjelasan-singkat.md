@@ -6,7 +6,7 @@ Cutting merupakan modul yang cukup rumit pada implementasinya. Memiliki banyak l
 
 ### Spreading
 
-Spreading adalah modul untuk mengkonversi suatu marker agar dapat menjadi form. Cara kerjanya adalah dengan memilih marker yang sudah dibuat lalu membagi qty marker tersebut sesuai jumlah form yang dibutuhkan. Dengan form seperti berikut : 
+Spreading adalah modul untuk mengkonversi suatu marker agar dapat menjadi form. Cara kerjanya adalah dengan memilih marker yang sudah dibuat lalu membagi qty marker tersebut sesuai jumlah form yang dibutuhkan. Dengan form seperti berikut :
 
 ![Spreading](/assets/images/spreading.png)
 
@@ -14,11 +14,13 @@ Spreading adalah modul untuk mengkonversi suatu marker agar dapat menjadi form. 
 
 Cutting Plan merupakan modul yang disediakan untuk mengalokasikan form agar dapat di-input oleh user meja. Untuk dapat di-input oleh meja diperlukan approve dan alokasi meja, yang diatur menggunakan modul _Manage Cutting Plan_.
 
-Tampilan alokasi cutting plan : 
+Tampilan alokasi cutting plan :
 
 ![Cutting Plan](/assets/images/cutting-plan.png)
 
 Tampilan manage cutting plan :
+
+![Manage Cutting Plan](/assets/images/manage-cut-plan.png)
 
 ### Cutting Process
 
