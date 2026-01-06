@@ -6,17 +6,17 @@ title: "Alur"
 
 Project NDS ini memiliki alur yang dinamis, maka sebaiknya aplikasinya juga dibuat agar dapat dinamis/mudah diubah/mudah dirombak. Untuk gambaran umumnya bisa dilihat di link berikut : [Alur NDS Figma](https://www.figma.com/board/Tz4RO2HK0G6SgR9bZZJwSa/NDS?node-id=0-1&t=BvV1F13V3Tcf253r-1)
 
-### Peta Produksi
+## Peta Produksi
 
 Untuk gambaran alur di lapangan, bisa dilihat di peta produksi berikut :
 
 ![Peta Produksi](/assets/images/production-map.png)
 
-### Struktur Database
+## Struktur Database
 
 Struktur database di project ini masih berkembang. Tapi untuk gambaran umum bisa ditampilkan seperti berikut :
 
-#### 1. NDS
+### 1. NDS
 
 Berikut struktur database dari NDS secara umum :
 
@@ -24,7 +24,7 @@ Berikut struktur database dari NDS secara umum :
 
 ![NDS ERD](/assets/images/NDS-ERD.png)
 
-#### 2. Sewing
+### 2. Sewing
 
 Untuk modul-modul di Sewing databasenya dipisahkan dari aplikasi NDS. Secara database menyatu dengan database master (signalbit). Berikut gambaran umumnya, tapi ini bukan versi terbarunya :
 

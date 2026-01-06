@@ -4,11 +4,11 @@ title: "Standar Project"
 
 Standar untuk project ini cukup simple. Hanya fokus pada cycle Model->Controller->View dan hasil.
 
-### Standar Penggunaan Laravel
+## Standar Penggunaan Laravel
 
 Standar untuk project ini berfokus pada 3 hal berikut, yaitu **Model**, **View**, dan **Controller** yang memiliki perannya masing-masing.
 
-#### 1. Model
+### 1. Model
 
 Digunakan untuk mengkonfigurasi perilaku table, koneksi yang digunakan, relasi antar table, dan sebagainya. Contoh sederhana sebuah Model di NDS:
 
@@ -193,7 +193,7 @@ Connection diatur dalam <code>config/database.php</code> :
 ],
 ```
 
-#### 2. View
+### 2. View
 
 Digunakan sebagai front-end dengan menggunakan **layout** seperti berikut :
 
@@ -357,7 +357,7 @@ Berikut contoh **penggunaan layout**nya :
 
 Untuk menaruh styling tambahan bisa di <code>@section("custom-link")</code>, dan script tambahan di <code>@section("script")</code>. Konten utama disimpan di <code>@section("content")</code>. Dan untuk mengirimkan request ke back-end menggunakan <b>JQuery ajax</b> diletakkan di <code>@section("custom-script")</code>
 
-#### 3. Controller
+### 3. Controller
 
 Controller digunakan sebagai back-end. Tempat untuk business logic. Bisa juga menggunakan service untuk fungsi yang digunakan berulang-kali dibanyak tempat.
 
