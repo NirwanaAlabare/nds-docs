@@ -154,6 +154,7 @@ const config = {
         additionalLanguages: ['php'],
       },
     }),
+    plugins: ["@cmfcmf/docusaurus-search-local"],
 };
 
 export default config;
