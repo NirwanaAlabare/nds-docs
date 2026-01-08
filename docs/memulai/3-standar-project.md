@@ -453,9 +453,9 @@ Jika request-nya menggunakan ajax, biasanya Controller akan mengembalikan **arra
 
 ```php
 return array(
-    "status" =>; 200, // Status Code
-    "message" =>; "Success", // Your message here
-    "additional" =>; [],
+    "status" => 200, // Status Code
+    "message" => "Success", // Your message here
+    "additional" => [],
 );
 ```
 
@@ -468,7 +468,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 return DataTables::eloquent($markersQuery)->toJson();
 
-<!-- OR -->
+// OR
 
 return DataTables::of($markersQuery)->toJson();
 ```

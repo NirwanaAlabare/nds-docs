@@ -122,3 +122,7 @@ Dan ini contoh penggunaannya :
 ```
 
 <code>@role('namaAkses')</code> adalah kode yang mendefinisikan akses agar hanya user yang memiliki role tertentu yang dapat mengakses element tersebut.
+
+## Struktur Database
+
+![Struktur Database Auth](/assets/images/struktur-database-authentication.png)
