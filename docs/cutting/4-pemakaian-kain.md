@@ -304,3 +304,9 @@ group by
 ```
 
 Query diatas merupakan query untuk mengambil data pemakaian kain dari modul form cutting piece, berdasarkan id_roll <code>group by id_roll</code>. **<u><a href="/assets/others/pemakaian-cutting-piece.sql" download>Download Pemakaian Cutting Piece Query</a></u>**.
+
+:::info
+
+Query lengkap untuk semua pemakaian bisa dicek di query sql berikut **<u><a href="/assets/others/pemakaian-cutting-union.sql" download>Download Pemakaian Cutting UNION</a></u>**.
+
+:::
