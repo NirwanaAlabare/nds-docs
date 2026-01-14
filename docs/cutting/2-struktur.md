@@ -22,7 +22,7 @@ Modul untuk proses form cutting berfokus pada tabel-tabel berikut :
 
 Merupakan tabel yang menampung **spesifikasi form hasil input dari spreading**, bisa juga hasil input spesifikasi manual melalui **form cutting manual**. Terdapat kolom **form_cut_input.marker_id** sebagai penghubung ke **marker.id**, Memiliki kolom **no_form** sebagai identifikasi umum dengan format <code>dd-mm-iteration</code>. Hanya saja identifikasi **no_form memiliki celah** yaitu ketika berganti tahun, no_form bisa memiliki kembaran.
 
-### 2. form_cut_input_detail Table {#form_cut_input-table}
+### 2. form_cut_input_detail Table {#form_cut_input_detail-table}
 
 Merupakan child table dari **form_cut_input**. Identitas di tabel ini berbeda dari tabel lain, table ini menggunakan uuid sebagai id. Untuk penghubung ke parent melalui **form_cut_input_detail.form_cut_id** ke **form_cut_input.id**. Tabel ini berisikan **detail pemakaian dari setiap roll yang discan di form**. Terdapat kolom **id_roll** sebagai identitas roll, sekaligus penghubung ke tabel scanned_item.
 

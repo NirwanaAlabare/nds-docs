@@ -1,0 +1,92 @@
+SELECT 
+	id_roll, 
+	MAX(qty_in) qty_in, 
+	SUM(total_pemakaian_roll) total_pemakaian_roll,
+	MIN(sisa_kain) sisa_kain,
+	SUM(short_roll) as short_roll,
+	unit_roll
+FROM (
+	SELECT 
+		form_cut_piece_detail.qty_pengeluaran qty_in,
+		form_cut_piece.created_at waktu_mulai,
+		form_cut_piece.updated_at waktu_selesai,
+		form_cut_piece.id,
+		DATE_FORMAT( form_cut_piece.created_at, '%M' ) bulan,
+		DATE_FORMAT( form_cut_piece.created_at, '%d-%m-%Y' ) tgl_input,
+		form_cut_piece.no_form no_form_cut_input,
+		'-' nama_meja,
+		form_cut_piece.act_costing_ws,
+		master_sb_ws.buyer,
+		form_cut_piece.style,
+		form_cut_piece.color,
+		form_cut_piece.color color_act,
+		form_cut_piece.panel,
+		master_sb_ws.qty,
+		form_cut_piece.cons_ws cons_ws,
+		form_cut_piece.cons_ws cons_marker,
+		'0' cons_ampar,
+		0 cons_act,
+		0 cons_piping,
+		0 panjang_marker,
+		'-' unit_panjang_marker,
+		0 comma_marker,
+		'-' unit_comma_marker,
+		0 lebar_marker,
+		'-' unit_lebar_marker,
+		0 panjang_actual,
+		'-' unit_panjang_actual,
+		0 comma_actual,
+		'-' unit_comma_actual,
+		0 lebar_actual,
+		'-' unit_lebar_actual,
+		form_cut_piece_detail.id_roll,
+		scanned_item.id_item,
+		scanned_item.detail_item,
+		COALESCE ( scanned_item.roll_buyer, scanned_item.roll ) roll,
+		scanned_item.lot,
+		'-' group_roll,
+		( CASE WHEN form_cut_piece_detail.qty >= COALESCE ( scanned_item.qty_in, 0 ) THEN 'Roll Utuh' ELSE 'Sisa Kain' END ) status_roll,
+		COALESCE ( scanned_item.qty_in, form_cut_piece_detail.qty ) qty_awal,
+		form_cut_piece_detail.qty qty_roll,
+		form_cut_piece_detail.qty_unit unit_roll,
+		0 berat_amparan,
+		0 est_amparan,
+		0 lembar_gelaran,
+		0 total_ratio,
+		0 qty_cut,
+		'00:00' average_time,
+		'0' sisa_gelaran,
+		0 sambungan,
+		0 sambungan_roll,
+		0 kepala_kain,
+		0 sisa_tidak_bisa,
+		0 reject,
+		0 piping,
+		form_cut_piece_detail.qty_sisa sisa_kain,
+		form_cut_piece_detail.qty_pemakaian pemakaian_lembar,
+		form_cut_piece_detail.qty_pemakaian total_pemakaian_roll,
+		ROUND(
+		form_cut_piece_detail.qty - ( form_cut_piece_detail.qty_pemakaian + form_cut_piece_detail.qty_sisa )) short_roll,
+		ROUND((
+				form_cut_piece_detail.qty - ( form_cut_piece_detail.qty_pemakaian + form_cut_piece_detail.qty_sisa ))/ COALESCE ( scanned_item.qty_in, form_cut_piece_detail.qty ) * 100,
+			2 
+		) short_roll_percentage,
+		form_cut_piece_detail.STATUS `status`,
+		form_cut_piece.employee_name,
+		'PCS' tipe_form_cut,
+		form_cut_piece.created_at,
+		form_cut_piece.updated_at 
+	FROM
+		form_cut_piece
+		LEFT JOIN form_cut_piece_detail ON form_cut_piece_detail.form_id = form_cut_piece.id
+		LEFT JOIN ( SELECT * FROM master_sb_ws GROUP BY id_act_cost ) master_sb_ws ON master_sb_ws.id_act_cost = form_cut_piece.act_costing_id
+		LEFT JOIN scanned_item ON scanned_item.id_roll = form_cut_piece_detail.id_roll 
+	WHERE
+		scanned_item.id_item IS NOT NULL 
+		AND form_cut_piece_detail.STATUS = 'complete' 
+	GROUP BY
+		form_cut_piece_detail.id
+) cutting
+where cutting.id_roll is not null and cutting.id_roll != '-' 
+group by 
+	id_roll
