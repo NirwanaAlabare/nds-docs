@@ -1,13 +1,5 @@
 SELECT 
-	id_roll, 
-	MAX(qty_in) qty_in, 
-	SUM(total_pemakaian_roll) total_pemakaian_roll,
-	MIN(sisa_kain) sisa_kain,
-	SUM(short_roll) as short_roll,
-	unit_roll
-FROM (
-	SELECT 
-		form_cut_piece_detail.qty_pengeluaran qty_in,
+		form_cut_piece_detail.qty qty_in,
 		form_cut_piece.created_at waktu_mulai,
 		form_cut_piece.updated_at waktu_selesai,
 		form_cut_piece.id,
@@ -67,26 +59,22 @@ FROM (
 		form_cut_piece_detail.qty_pemakaian total_pemakaian_roll,
 		ROUND(
 		form_cut_piece_detail.qty - ( form_cut_piece_detail.qty_pemakaian + form_cut_piece_detail.qty_sisa )) short_roll,
-		ROUND((
-				form_cut_piece_detail.qty - ( form_cut_piece_detail.qty_pemakaian + form_cut_piece_detail.qty_sisa ))/ COALESCE ( scanned_item.qty_in, form_cut_piece_detail.qty ) * 100,
-			2 
-		) short_roll_percentage,
+		ROUND((form_cut_piece_detail.qty - ( form_cut_piece_detail.qty_pemakaian + form_cut_piece_detail.qty_sisa ))/ COALESCE ( scanned_item.qty_in, form_cut_piece_detail.qty ) * 100, 2 ) short_roll_percentage,
 		form_cut_piece_detail.STATUS `status`,
 		form_cut_piece.employee_name,
 		'PCS' tipe_form_cut,
 		form_cut_piece.created_at,
-		form_cut_piece.updated_at 
+		form_cut_piece.updated_at,
+		(CASE WHEN b.id is null THEN 'latest' ELSE 'not latest' END) roll_status
 	FROM
 		form_cut_piece
 		LEFT JOIN form_cut_piece_detail ON form_cut_piece_detail.form_id = form_cut_piece.id
+		LEFT JOIN form_cut_piece_detail b on b.id_roll = form_cut_piece_detail.id_roll AND b.created_at > form_cut_piece_detail.created_at
 		LEFT JOIN ( SELECT * FROM master_sb_ws GROUP BY id_act_cost ) master_sb_ws ON master_sb_ws.id_act_cost = form_cut_piece.act_costing_id
 		LEFT JOIN scanned_item ON scanned_item.id_roll = form_cut_piece_detail.id_roll 
 	WHERE
 		scanned_item.id_item IS NOT NULL 
 		AND form_cut_piece_detail.STATUS = 'complete' 
+		and form_cut_piece_detail.created_at >= '2026-01-01 00:00:00' and form_cut_piece_detail.created_at <= '2026-01-14 23:59:59'
 	GROUP BY
 		form_cut_piece_detail.id
-) cutting
-where cutting.id_roll is not null and cutting.id_roll != '-' 
-group by 
-	id_roll

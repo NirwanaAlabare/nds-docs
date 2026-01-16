@@ -1,13 +1,5 @@
-SELECT 
-	id_roll, 
-	MAX(qty_in) qty_in, 
-	SUM(total_pemakaian_roll) total_pemakaian_roll,
-	MIN(sisa_kain) sisa_kain,
-	SUM(short_roll) as short_roll,
-	unit_roll
-FROM (
-	select
-		COALESCE(scanned_item.qty_in, form_cut_piping.qty) qty_in,
+select
+		COALESCE(form_cut_piping.qty) qty_in,
 		form_cut_piping.created_at waktu_mulai,
 		form_cut_piping.updated_at waktu_selesai,
 		form_cut_piping.id,
@@ -71,17 +63,16 @@ FROM (
 		form_cut_piping.operator,
 		'PIPING' tipe_form_cut,
 		form_cut_piping.created_at,
-		form_cut_piping.updated_at
+		form_cut_piping.updated_at,
+		(CASE WHEN c.id is null THEN 'latest' ELSE 'not latest' END) roll_status
 	from
 		form_cut_piping
+		LEFT JOIN form_cut_input_detail b on b.id_roll = form_cut_piping.id_roll AND b.created_at > form_cut_piping.created_at and b.created_at >= '2026-01-01 00:00:00' and b.created_at <= '2026-01-14 23:59:59'
+		LEFT JOIN form_cut_piping c on c.id_roll = form_cut_piping.id_roll AND c.id != form_cut_piping.id and c.created_at > form_cut_piping.created_at and c.created_at >= '2026-01-01 00:00:00' and c.created_at <= '2026-01-14 23:59:59'
 		left join (SELECT * FROM master_sb_ws GROUP BY id_act_cost) master_sb_ws on master_sb_ws.id_act_cost = form_cut_piping.act_costing_id
 		left join scanned_item on scanned_item.id_roll = form_cut_piping.id_roll
 	where
-		id_item is not null
-		and form_cut_piping.created_at >= '2026-01-12 00:00:00' and form_cut_piping.created_at <= '2026-01-14 23:59:59'
+		scanned_item.id_item is not null
+		and form_cut_piping.created_at >= '2026-01-01 00:00:00' and form_cut_piping.created_at <= '2026-01-14 23:59:59'
 	group by
 		form_cut_piping.id
-) cutting
-where cutting.id_roll is not null and cutting.id_roll != '-' 
-group by 
-	id_roll
