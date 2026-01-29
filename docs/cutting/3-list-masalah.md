@@ -22,6 +22,6 @@ Mungkin perlu ditinjau ulang bagaimana agar qty roll dapat memiliki qty yang kon
 
 :::info
 
-Biasanya qty roll yang sesua dari tabel **scanned_item** adalah **qty sisa kain** dari pemakaian terakhir di tabel <b><u>[form_cut_input_detail](/docs/cutting/2-struktur.md#form_cut_input-table)</u></b>, <b><u>[form_cut_piping](/docs/cutting/2-struktur.md#form_cut_input-detail-table)</u></b> dan mungkin juga (*jika ada update pemakaian roll di form_cut_reject*) <b><u>[form_cut_reject](/docs/cutting/2-struktur.md#form_cut_reject-table)</u></b>
+Biasanya qty roll yang sesuai dari tabel **scanned_item** adalah **qty sisa kain** dari pemakaian terakhir di tabel <b><u>[form_cut_input_detail](/docs/cutting/2-struktur.md#form_cut_input-table)</u></b>, <b><u>[form_cut_piping](/docs/cutting/2-struktur.md#form_cut_input-detail-table)</u></b> dan mungkin juga (*jika ada update pemakaian roll di form_cut_reject*) <b><u>[form_cut_reject](/docs/cutting/2-struktur.md#form_cut_reject-table)</u></b>
 
 :::

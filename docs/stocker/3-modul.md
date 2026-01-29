@@ -484,7 +484,11 @@ Setelah form dilengkapi dan disimpan. List part detail beserta size dan rasio da
     </TabItem>
 </Tabs>
 
-Sebagai penanda untuk stocker additional, akan ada **note "ADDITIONAL STOCKER"** di detail stocker setelah stocker digenerate .
+:::info
+
+Sebagai pembeda untuk stocker additional, akan ada tambahan **note "ADDITIONAL STOCKER"** di detail stocker ```stocker_input.notes``` setelah stocker digenerate .
+
+:::
 
 ## Reorder Stocker Numbering
 

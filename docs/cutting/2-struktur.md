@@ -63,3 +63,22 @@ Merupakan tabel untuk proses eksternal di cutting. Yang terpenting di tabel **fo
 Qty dari tabel **form_cut_piping** harus disinkronisasi dengan tabel **scanned_item**.
 
 :::
+
+## Cutting Piece
+
+![Struktur Database Piece](/assets/images/struktur-database-cutting-piece.png)
+
+### 1. form_cut_piece Table {#form_cut_piece-table}
+
+Tabel **form_cut_piece** merupakan tabel yang digunakan untuk menampung data spesifikasi dari form cutting piece, seperti kolom **no_form** sebagai identitas, **order(act_costing_id), color, panel, cons_ws, no_cut**. Karakteristik data di tabel ini mirip-mirip dengan data di tabel <u>**[form_cut_input](#1-form_cut_input-table)**</u>. Hanya saja tabel ini tidak terhubung dengan marker, dan peruntukannya khusus untuk form dengan **pemakaian kain dengan unit PCS/PCE**.
+
+### 2. form_cut_piece_detail Table {#form_cut_piece_detail-table}
+
+Child table dari <u>**[form_cut_piece](#form_cut_piece-table)**</u>, berisi **data pemakaian kain (dengan unit PCS/PCE)** beserta dengan **Output per-panel-nya**. 
+
+
+:::info
+
+Qty dari tabel **form_cut_piece_detail** harus disinkronisasi dengan tabel **scanned_item** berdasarkan **id_roll**.
+
+:::
