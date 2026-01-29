@@ -33,7 +33,7 @@ Setelah form terdaftar di tabel diatas, setiap form akan mendapatkan **no_cut**.
 
 ### Group Gelaran dan Part Detail
 
-Lalu stocker akan mengelompokkan **group gelaran** (hasil dari proses cutting) dan menarik list **part detail** yang terdaftar di part group dimana form terdaftar berdasarkan part_form dengan cara 
+Lalu stocker akan mengelompokkan **group gelaran** (hasil dari proses cutting) dan menarik list **part detail** yang terdaftar di part group berdasarkan form melalui part_form 
 
 ```
 stocker_input.form_cut_id -> form_cut_input.id -> part_form.form_cut_id -> part_form.part_id -> part.id -> part_detail.part_id
@@ -183,7 +183,7 @@ Berdasarkan form, stocker akan mengambil data dari **marker_input_detail** untuk
 
 ![Size dan Range](/assets/images/stocker-module/form-size-range.png) 
 
-Terdapat daftar size beserta rasio (dari marker_detail) dan range-nya. Range adalah qty awal dan akhir yang bersifat kumulatif di setiap form dengan spesifikasi yang cocok, berdasarkan nomor cut dari form. Misalnya :
+Terdapat daftar size beserta rasio (dari marker_detail) dan range-nya. Range adalah qty awal dan akhir yang bersifat kumulatif di setiap form, dengan spesifikasi yang cocok, berdasarkan nomor cut dari form. Misalnya :
 
 <center><div id="size-range-1"><small><i>*Gambar Size-Range No. Cut 1</i></small></div></center>
 ![Size dan Range 1](/assets/images/stocker-module/size-range-1.png)
@@ -193,7 +193,7 @@ Gambar diatas adalah gambaran bagaimana range ditentukan. Berikut gambar untuk l
 <center><div id="size-range-2"><small><i>*Gambar Size-Range No. Cut 2</i></small></div></center>
 ![Size dan Range 2](/assets/images/stocker-module/size-range-2.png)
 
-Gambar diatas merupakan lanjutan dari gambar <u>[Size Range 1](#size-range-1)</u>. Range akan meninjau form sebelumnya yang memiliki sepesifikasi serupa (berdasakan *order, color, size*) dengan nomor cut yang paling mendekati form yang dipilih, untuk bisa mendapatkan range yang sesuai.
+Gambar diatas merupakan lanjutan dari gambar <u>[Size Range 1](#size-range-1)</u>. Range akan meninjau form sebelumnya yang memiliki spesifikasi serupa (berdasakan *order, color, size*) dengan nomor cut yang paling mendekati form yang dipilih, untuk bisa mendapatkan range yang sesuai.
 
 <details>
     <summary>Code</summary>
@@ -408,7 +408,7 @@ Separate Qty adalah tool yang digunakan untuk menentukan dan memisahkan qty gela
 ```
 
 
-User dapat menambahkan ataupun mengurangi rasio stocker serta qty-nya secara kustom. **Separate Stocker Tool** ini akan menggantikan/menimpa spesifikasi rasio dan qty yang sudah ada di [stocker detail](#size-dan-range). Biasanya user akan menggunakan tool ini jika perubahannya memiliki skala yang cukup besar. Sedangkan untuk perubahan skala kecil yang biasanya disebut dengan *Turun Size / Naik Size* akan menggunakan tool [Size Qty (Modify Size Qty)](#modify-size-qty).
+User dapat menambahkan ataupun mengurangi rasio stocker serta qty-nya secara kustom. **Separate Stocker Tool** ini akan menggantikan/menimpa spesifikasi rasio dan qty yang sudah ada di [stocker detail](#size-dan-range). Biasanya user akan menggunakan tool ini jika perubahannya memiliki skala yang cukup besar. Sedangkan untuk perubahan skala kecil yang biasanya disebut dengan *Turun Size / Naik Size* akan menggunakan tool **<u>[Size Qty (Modify Size Qty)](#modify-size-qty)</u>**.
 
 #### 2. No. Stocker
 
@@ -419,7 +419,7 @@ User dapat menambahkan ataupun mengurangi rasio stocker serta qty-nya secara kus
     }
 ```
 
-Adalah tool yang digunakan untuk meninjau dan mengatur ulang range dari stocker jika tidak sesuai dengan range seharusnya, Biasanya jika ada perubahan qty pada form sebelumnya yang menyebabkan range harus mundur.
+Adalah tool yang digunakan untuk meninjau dan mengatur ulang range dari stocker jika tidak sesuai dengan range seharusnya, Biasanya digunakan jika ada perubahan qty pada form sebelumnya yang menyebabkan range harus diatur ulang.
 
 #### 3. Grouping {#grouping}
 
@@ -441,7 +441,7 @@ Merupakan tool yang dipakai jika group gelaran tidak sesuai dengan data aktual. 
     }
 ```
 
-Tool ini digunakan untuk menurunkan/menaikkan size, misalnya di size S ada turun size ke size XS, maka dari size S akan dikurangi qty nya dan size XS akan ditambahkan qty-nya sesuai kebutuhan. Berikut adalah contoh form untuk mengeksekusi tool **Size Qty (Modify Size Qty)** :
+Tool ini digunakan untuk menurunkan/menaikkan size, misalnya di size **S ada turun size ke size XS**, maka dari **size S akan dikurangi** qty nya dan **size XS akan ditambahkan** qty-nya sesuai kebutuhan. Berikut adalah contoh form untuk mengeksekusi tool **Size Qty (Modify Size Qty)** :
 
 ![Size Qty](/assets/images/stocker-module/modify-size-qty.png)
 
@@ -451,7 +451,7 @@ Seperti yang sudah disebutkan di <u>[List Problem Marker - Multi Order Marker](/
 
 ![Add Stocker Additional](/assets/images/stocker-module/add-additional-stocker.png)
 
-Dengan mengklik tombol add additional stocker user bisa menambahkan order lain untuk disandingkan dengan form yang dipilih. Berikut tampilan form untuk menambahkan additional stocker :
+Dengan mengklik tombol **add additional stocker** user bisa menambahkan order lain untuk disandingkan dengan form yang dipilih. Berikut tampilan form untuk menambahkan additional stocker :
 
 ![Add Stocker Additional Form](/assets/images/stocker-module/add-additional-stocker-form.png)
 
@@ -499,7 +499,7 @@ Sebagai pembeda untuk stocker additional, akan ada tambahan **note "ADDITIONAL S
     }
 ```
 
-Selain tools diatas, ada juga tool **Reorder Stocker Numbering**. Fungsinya untuk **mengurutkan ulang semua form yang berada dalam suatu part group**. Kadang perubahan user di form cutting akan menyebabkan beberapa range menjadi salah atau tidak sesuai, misalnya stocker form yang range-nya tidak melanjutkan form sebelumnya, range yang terlewat, range stocker yang menimpa range stocker lain, nomor cuttingan yang tidak berurutan dsb. Karena prosesnya cukup banyak maka tool ini dibuat agar program dapat memebenarkan range sesuai dengan data yang seharusnya. Semakin banyak form dalam suatu part group maka proses Reorder Stocker Numbering ini juga akan semakin lama.
+Selain tools diatas, ada juga tool **Reorder Stocker Numbering**. Fungsinya untuk **mengurutkan ulang semua form yang berada dalam suatu part group**. Kadang perubahan user di form cutting akan menyebabkan beberapa range menjadi salah atau tidak sesuai, misalnya stocker form yang range-nya tidak melanjutkan form sebelumnya, range yang terlewat, range stocker yang menimpa range stocker lain, nomor cuttingan yang tidak berurutan dsb. Karena prosesnya cukup banyak maka tool ini dibuat agar program dapat memebenarkan range sesuai dengan data yang seharusnya. **Semakin banyak form dalam suatu part group maka proses Reorder Stocker Numbering ini juga akan semakin lama**.
 
 Untuk mengeksekusi tool ini cukup klik tombol **Urutkan Ulang** pada modal pop-up dari detail part di menu part :
 

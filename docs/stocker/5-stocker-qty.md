@@ -100,7 +100,7 @@ group by
 	part_detail.id
 ```
 
-Setiap satu ```part_detail.id``` akan terbentuk group bagian dan dari setiap ```part_detail.id``` itu akan mendapatkan data bundle ```form_cut_input_detail.group_stocker```, ```marker_input_detail.so_det_id```, ```marker_input_detail.ratio```.
+Setiap satu ```part_detail.id``` akan masuk ke setiap group yang terbentuk dan dari setiap ```part_detail.id``` akan mendapatkan data bundle yang berdasar pada kolom ```form_cut_input_detail.group_stocker```, ```marker_input_detail.so_det_id```, ```marker_input_detail.ratio```.
 
 ## Hasil Stocker
 
