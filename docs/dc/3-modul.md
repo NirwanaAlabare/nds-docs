@@ -347,17 +347,119 @@ Setelah stocker discan akan muncul detail stocker dari mulai informasi tentang d
   </TabItem>
 </Tabs>
 
-Untuk transaksinya berfokus pada gambar dibawah ini :
+Ketika user meng-scan stocker ke DC IN maka stocker itu akan dimasukkan ke data temporary.
+
+
+```php title='App\Http\Controllers\DCInController'
+...
+public function insert_tmp_dc_in(Request $request)
+{
+    $user = Auth::user()->name;
+    if ($request->txttuj_h == 'NON SECONDARY') {
+        $tujuan = $request->txttuj_h;
+        $lokasi = $request->txtlok_h;
+        $tempat = $request->txttempat_h;
+    } else {
+        $tujuan = $request->txttuj_h;
+        $lokasi = $request->txtlok_h;
+        $tempat = '-';
+    }
+
+    $cekdata =  DB::select("
+        select
+            *
+        from
+            tmp_dc_in_input_new
+            left join dc_in_input on dc_in_input.id_qr_stocker = tmp_dc_in_input_new.id_qr_stocker
+        where
+            tmp_dc_in_input_new.id_qr_stocker = '" . $request->txtqrstocker . "' and tmp_dc_in_input_new.user = '".Auth::user()->username."'
+    ");
+
+    $cekdata_fix = $cekdata ? $cekdata[0] : null;
+    if ($cekdata_fix ==  null) {
+
+        DB::insert("
+            insert into tmp_dc_in_input_new
+            (
+                id_qr_stocker,
+                qty_reject,
+                qty_replace,
+                tujuan,
+                tempat,
+                lokasi,
+                user
+            )
+            values
+            (
+                '" . $request->txtqrstocker . "',
+                '0',
+                '0',
+                '$tujuan',
+                '$tempat',
+                '$lokasi',
+                '$user'
+            )
+        ");
+
+        DB::update(
+            "update stocker_input set status = 'dc' where id_qr_stocker = '" . $request->txtqrstocker . "'"
+        );
+    }
+}
+...
+```
 
 ![Scan DC IN 1](/assets/images/dc-module/create-dc-in-1.png)
 
-<Tabs groupId="dc-process-1">
+<Tabs groupId="dc-process">
   <TabItem value="single-assign" label="Single Assignment">
     Setelah klik icon search di tabel (single assignment)
 
     ![Single Assign](/assets/images/dc-module/create-dc-in-assign.png)
 
     Akan muncul tampilan seperti diatas, dan dapat ditentukanlah qty-nya dan lokasi/proses selanjutnya (berdasarkan spesifikasi ```part_detail```), jika non-secondary maka akan ditampilkan pilihan rak dan detail lokasinya bisa juga langsung ke troli. Dan jika secondary maka akan ditampilkan pilihan proses secondary yang perlu dilalui selanjutnya. 
+
+    ```php title='App\Http\Controllers\DCInController.php'
+    ...
+    public function update_tmp_dc_in(Request $request)
+    {
+        if ($request->txttuj == 'NON SECONDARY') {
+            $update_stocker_input = DB::update("
+                update
+                    stocker_input
+                set
+                    tempat = '" . $request->cbotempat . "',
+                    tujuan = '" . $request->txttuj . "',
+                    lokasi = '" . $request->cbolokasi . "'
+                where
+                    concat(so_det_id,'_',range_awal,'_',range_akhir,'_',shade) = '" . $request->id_kode . "'
+            ");
+        }
+
+        $update_tmp_dc_in = DB::table("tmp_dc_in_input_new")->
+            where("id_qr_stocker", $request->id_c )->
+            update([
+                "qty_reject" => $request->txtqtyreject,
+                "qty_replace" => $request->txtqtyreplace,
+                "tujuan" => $request->txttuj,
+                "tempat" => $request->cbotempat,
+                "lokasi" => $request->cbolokasi,
+                "ket" => $request->txtket
+            ]);
+
+        if (!(is_nan($update_tmp_dc_in))) {
+            return array(
+                'status' => 300,
+                'message' => 'Data Stocker "' . $request->id_c . '" berhasil diubah',
+                'redirect' => '',
+                'table' => 'datatable-scan',
+                'additional' => [],
+                'callback' => 'resetCheckedStocker()'
+            );
+        }
+    }
+    ...
+    ```
   </TabItem>
   <TabItem value="mass-assign" label="Mass Assignment">
     Setelah menceklis stocker dan klik **'edit selected stocker'** (mass assignment)
@@ -365,9 +467,103 @@ Untuk transaksinya berfokus pada gambar dibawah ini :
     ![Mass Assign](/assets/images/dc-module/create-dc-in-assign-1.png)
 
     Akan muncul tampilan seperti diatas, tidak terdapat kolom untuk menginput qty-nya karena tiap stocker dapat berbeda qty-nya, hanya ada kolom untuk menentukan lokasi/proses selanjutnya (berdasarkan spesifikasi ```part_detail```), jika non-secondary maka akan ditampilkan pilihan rak dan detail lokasinya bisa juga langsung ke troli. Dan jika secondary maka akan ditampilkan pilihan proses secondary yang perlu dilalui selanjutnya. 
+
+    ```php title='App\Http\Controllers\DCInController.php'
+    ...
+    public function update_mass_tmp_dc_in(Request $request)
+    {
+        ini_set('max_execution_time', 36000);
+
+        $massStockerIds = explode(",", $request->mass_id_c);
+
+        if (count($massStockerIds) > 0) {
+            $stockerCodes = Stocker::selectRaw("concat(so_det_id,'_',range_awal,'_',range_akhir,'_',shade) kode")->whereIn("id_qr_stocker", $massStockerIds)->pluck('kode')->toArray();
+            $stockerCodeRaw = "(";
+            for ($i = 0; $i < count($stockerCodes); $i++) {
+                if ($i > 0) {
+                    $stockerCodeRaw .= ", '".$stockerCodes[$i]."'";
+                } else {
+                    $stockerCodeRaw .= "'".$stockerCodes[$i]."'";
+                }
+            }
+            $stockerCodeRaw .= ")";
+
+            if ($request->mass_txttuj == 'NON SECONDARY') {
+                $update_stocker_input = DB::update("
+                    update
+                        stocker_input
+                    set
+                        tempat = '" . $request->mass_cbotempat . "',
+                        tujuan = '" . $request->mass_txttuj . "',
+                        lokasi = '" . $request->mass_cbolokasi . "'
+                    where
+                        concat(so_det_id,'_',range_awal,'_',range_akhir,'_',shade) in " . $stockerCodeRaw . "
+                ");
+            }
+
+            $update_tmp_dc_in = DB::table("tmp_dc_in_input_new")->
+                whereIn("id_qr_stocker", $massStockerIds)->
+                update([
+                    "tujuan" => $request->mass_txttuj,
+                    "tempat" => $request->mass_cbotempat,
+                    "lokasi" => $request->mass_cbolokasi,
+                ]);
+
+            if (!(is_nan($update_tmp_dc_in))) {
+                return array(
+                    'status' => 300,
+                    'message' => 'Data Stocker "' . $request->mass_id_c . '" berhasil diubah',
+                    'redirect' => '',
+                    'table' => 'datatable-scan',
+                    'additional' => [],
+                    'callback' => 'resetCheckedStocker()'
+                );
+            }
+        }
+
+        return array(
+            'status' => 400,
+            'message' => 'Data Stocker "' . $request->mass_id_c . '" gagal diubah',
+            'redirect' => '',
+            'table' => 'datatable-scan',
+            'additional' => [],
+            'callback' => 'resetCheckedStocker()'
+        );
+    }   
+    ...
+    ```
   </TabItem>
   <TabItem value="delete-temp-dc" label="Cancel DC Scan">
     Untuk membatalkan scan ke dc cukup dengan menceklis stocker yang akan dibatalkan lalu klik button **'Delete Selected Stocker'**. 
+    
+    ```php title='App\HttpControllers\DCInInputController'
+    ...
+    public function delete_mass_tmp_dc_in(Request $request)
+    {
+        ini_set('max_execution_time', 36000);
+
+        $massStockerIds = explode(",", $request->ids);
+
+        if (count($massStockerIds) > 0) {
+            $delete_tmp_dc_in = DB::table("tmp_dc_in_input_new")->
+                whereIn("id_qr_stocker", $massStockerIds)->
+                delete();
+
+            if ($delete_tmp_dc_in) {
+                return array(
+                    "status" => 200,
+                    "message" => "Stock DC berhasil dihapus"
+                );
+            }
+        }
+
+        return array(
+            "status" => 200,
+            "message" => "Stock DC gagal dihapus"
+        );
+    }
+    ...
+    ```
   </TabItem>
 </Tabs>
 
@@ -385,11 +581,119 @@ dc_qty = qty_awal - qty_reject + qty_replace
 
 Karena stocker adalah qty per-panel maka untuk menghitung secara per-size harus digunakan grouping dalam query-nya.
 
-```
-Query DC
+```sql title='dc-in-qty.sql'
+SELECT 
+	GROUP_CONCAT(id_qr_stocker) as stockers,
+	buyer,
+	act_costing_ws,
+	color,
+	so_det_id,
+	panel,
+	panel_status,
+	GROUP_CONCAT(nama_part) as nama_part,
+	GROUP_CONCAT(part_status) as part_status,
+	CASE WHEN panel_status = 'main' THEN COALESCE(qty_in_main, qty_in) ELSE MIN(qty_in) END as qty_in
+FROM
+	(
+		SELECT
+            UPPER(a.id_qr_stocker) id_qr_stocker,
+            DATE_FORMAT(a.tgl_trans, '%d-%m-%Y') tgl_trans_fix,
+            a.tgl_trans,
+            s.act_costing_ws,
+            s.color,
+            p.buyer,
+            p.style,
+            p.panel,
+            p.id part_id,
+            p.panel_status,
+            s.so_det_id,
+            s.ratio,
+            a.qty_awal,
+            a.qty_reject,
+            a.qty_replace,
+            CONCAT(s.range_awal, ' - ', s.range_akhir) stocker_range,
+            (a.qty_awal - a.qty_reject + a.qty_replace) qty_in_main,
+            null qty_in,
+            a.tujuan,
+            a.lokasi,
+            a.tempat,
+            a.created_at,
+            a.user,
+            COALESCE(f.no_cut, fp.no_cut, '-') no_cut,
+            COALESCE(msb.size, s.size) size,
+            mp.nama_part,
+            pd.id as part_detail_id,
+            pd.part_status
+		from
+            dc_in_input a
+            left join stocker_input s on a.id_qr_stocker = s.id_qr_stocker
+            left join master_sb_ws msb on msb.id_so_det = s.so_det_id
+            left join form_cut_input f on f.id = s.form_cut_id
+            left join form_cut_reject fr on fr.id = s.form_reject_id
+            left join form_cut_piece fp on fp.id = s.form_piece_id
+            left join part_detail pd on s.part_detail_id = pd.id
+            left join part p on pd.part_id = p.id
+            left join master_part mp on mp.id = pd.master_part_id
+		where
+            a.tgl_trans between '2026-01-01' AND '2026-01-26' AND
+            s.id is not null AND
+            (s.cancel IS NULL OR s.cancel != 'y') and 
+            pd.part_status = 'main'
+		UNION ALL
+		SELECT
+            UPPER(a.id_qr_stocker) id_qr_stocker,
+            DATE_FORMAT(a.tgl_trans, '%d-%m-%Y') tgl_trans_fix,
+            a.tgl_trans,
+            s.act_costing_ws,
+            s.color,
+            CASE WHEN pd.part_status = 'complement' THEN pcom.buyer ELSE p.buyer END as buyer,
+            CASE WHEN pd.part_status = 'complement' THEN pcom.style ELSE p.style END as style,
+            CASE WHEN pd.part_status = 'complement' THEN pcom.panel ELSE p.panel END as panel,
+            CASE WHEN pd.part_status = 'complement' THEN pcom.id ELSE p.id  END as part_id,
+            CASE WHEN pd.part_status = 'complement' THEN pcom.panel_status ELSE p.panel_status END as panel_status,
+            s.so_det_id,
+            s.ratio,
+            a.qty_awal,
+            a.qty_reject,
+            a.qty_replace,
+            CONCAT(s.range_awal, ' - ', s.range_akhir) stocker_range,
+            null qty_in_main,
+            (a.qty_awal - a.qty_reject + a.qty_replace) qty_in,
+            a.tujuan,
+            a.lokasi,
+            a.tempat,
+            a.created_at,
+            a.user,
+            COALESCE(f.no_cut, fp.no_cut, '-') no_cut,
+            COALESCE(msb.size, s.size) size,
+            mp.nama_part,
+            pd.id as part_detail_id,
+            pd.part_status
+		from
+            dc_in_input a
+            left join stocker_input s on a.id_qr_stocker = s.id_qr_stocker
+            left join master_sb_ws msb on msb.id_so_det = s.so_det_id
+            left join form_cut_input f on f.id = s.form_cut_id
+            left join form_cut_reject fr on fr.id = s.form_reject_id
+            left join form_cut_piece fp on fp.id = s.form_piece_id
+            left join part_detail pd on s.part_detail_id = pd.id
+            left join part p on pd.part_id = p.id
+            left join part_detail pdcom on pdcom.id = pd.from_part_detail
+            left join part pcom on pcom.id = pdcom.part_id 
+            left join master_part mp on mp.id = pd.master_part_id
+		where
+            a.tgl_trans between '2026-01-01' AND '2026-01-31' AND
+            s.id is not null AND
+            (s.cancel IS NULL OR s.cancel != 'y') and 
+            (pd.part_status != 'main' OR pd.part_status IS NULL)
+	) dc
+group by 
+	dc.part_id,
+	dc.so_det_id,
+	dc.stocker_range
 ```
 
-Download query dc per-size.
+**<u>[Download query dc per-size](/assets/others/query-dc-in.sql)</u>**
 
 ## Secondary Inhouse
 
