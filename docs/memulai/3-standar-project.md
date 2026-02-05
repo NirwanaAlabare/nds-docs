@@ -526,3 +526,145 @@ Untuk contoh penggunaannya bisa dilihat di :
 @endif
 ...
 ```
+
+Untuk **mengirim request datatable dari view** biasanya akan menggunakan jquery ajax seperti ini : 
+
+```js 
+...
+// Stocker Datatable
+let datatable = $("#datatable").DataTable({
+    ordering: false,
+    processing: true,
+    serverSide: true,
+    ajax: {
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '{{ route('stocker') }}',
+        dataType: 'json',
+        dataSrc: 'data',
+        data: function(d) {
+            d.dateFrom = $('#tgl-awal').val();
+            d.dateTo = $('#tgl-akhir').val();
+        },
+    },
+    columns: [
+        {
+            data: null,
+            searchable: false
+        },
+        {
+            data: 'tanggal_selesai',
+            searchable: false
+        },
+        {
+            data: 'no_form'
+        },
+        {
+            data: 'nama_meja'
+        },
+        {
+            data: 'no_cut',
+        },
+        {
+            data: 'style'
+        },
+        {
+            data: 'color'
+        },
+        {
+            data: 'part_details',
+            searchable: false
+        },
+        {
+            data: 'total_lembar',
+            searchable: false
+        },
+        {
+            data: 'marker_details',
+            searchable: false
+        },
+        {
+            data: 'id_marker'
+        },
+        {
+            data: 'act_costing_ws'
+        },
+        {
+            data: 'buyer'
+        },
+        {
+            data: 'type'
+        },
+    ],
+    columnDefs: [
+        // Act Column
+        {
+            targets: [0],
+            render: (data, type, row, meta) => {
+                if (row.type == "PIECE") {
+                    return `<div class='d-flex gap-1 justify-content-center'> <a class='btn btn-primary btn-sm' href='{{ route("show-stocker-pcs") }}/`+row.form_cut_id+`' data-bs-toggle='tooltip'><i class='fa fa-search-plus'></i></a> </div>`;
+                }
+
+                return `<div class='d-flex gap-1 justify-content-center'> <a class='btn btn-primary btn-sm' href='{{ route("show-stocker") }}/`+row.form_cut_id+`' data-bs-toggle='tooltip'><i class='fa fa-search-plus'></i></a> </div>`;
+            }
+        },
+        // No. Form Column
+        {
+            targets: [2],
+            className: "text-nowrap",
+            render: (data, type, row, meta) => {
+                if (row.type == "PIECE") {
+                    return data ? `<a class='fw-bold' href='{{ route('process-cutting-piece') }}/ `+row.form_cut_id+`' target='_blank'><u>`+data+`</u></a>` : "-";
+                }
+
+                return data;
+            }
+        },
+        // No. Meja Column
+        {
+            targets: [3],
+            className: "text-nowrap",
+            render: (data, type, row, meta) => data ? data.toUpperCase() : "-"
+        },
+        // Marker Hyperlink
+        {
+            targets: [10],
+            render: (data, type, row, meta) => {
+                return data ? `<a class='fw-bold' href='{{ route('edit-marker') }}/ `+row.marker_id+`' target='_blank'><u>`+data+`</u></a>` : "-";
+            }
+        },
+        // Text No Wrap
+        {
+            targets: "_all",
+            className: "text-nowrap"
+        }
+    ]
+});
+
+// Datatable Header Filter
+$('#datatable thead tr').clone(true).appendTo('#datatable thead');
+$('#datatable thead tr:eq(1) th').each(function(i) {
+    if (i == 1 || i == 2 || i == 3 || i == 4 || i == 5 || i == 6 || i == 7 || i == 8 || i == 10 || i == 11 || i == 12) {
+        var title = $(this).text();
+        $(this).html('<input type="text" class="form-control form-control-sm" style="width:100%"/>');
+
+        $('input', this).on('keyup change', function() {
+            if (datatable.column(i).search() !== this.value) {
+                datatable
+                    .column(i)
+                    .search(this.value)
+                    .draw();
+            }
+        });
+    } else {
+        $(this).empty();
+    }
+});
+
+// Datatable Reload wrapped in a function
+function dataTableReload() {
+    datatable.ajax.reload();
+}
+...
+```
