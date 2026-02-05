@@ -472,3 +472,57 @@ return DataTables::eloquent($markersQuery)->toJson();
 
 return DataTables::of($markersQuery)->toJson();
 ```
+
+Dan untuk return view biasanya akan terlihat seperti : 
+
+```php 
+public function index(Request $request)
+{
+    // If the request comes from ajax (datatable) then return datatable
+    if ($request->ajax()) {
+        $dataStockerReject = StockerReject::where(...);
+
+        return Datatables::of($dataStockerReject)->toJson();
+    }
+
+    // Return View for default
+    return view('stocker.stocker.stocker-reject', ['page' => 'dashboard-stocker', 'subPageGroup' => 'stocker-reject', 'subPage' => 'stocker-reject']);
+}
+
+```
+
+Seperti yang terlihat di code diatas, biasanya ketika membuat suatu view, dibuat juga **tampilan data-nya**, maka didalam controller biasanya disimpan juga fungsi return datatable untuk ketika ada request ajax dari datatable. Dan default-nya akan me-return view dengan format 
+
+```php
+view('location_of_resources_view/name_of_view', ['page' => 'parent-view', 'subPageGroup' => 'navbar-item', 'subPage' => 'sub-navbar-item']) 
+```
+
+Untuk contoh penggunaannya bisa dilihat di :
+
+```php title='resources\views\layouts\navbar.blade.php'
+...
+@if ($page == 'dashboard-stocker') // 'page'=>'parent-view'
+    @role('stocker')
+        <li class="nav-item dropdown">
+            /*'subPageGroup'=>'navbar-item'*/ <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"aria-expanded="false" class="nav-link dropdown-toggle {{ $subPageGroup == 'stocker-reject' ? 'active' : '' }}">Stocker Reject</a>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                <li>
+                    /*'subPage'=>'sub-navbar-item'*/ <a href="{{ route('stocker-reject') }}" class="dropdown-item {{ $subPage == 'stocker-reject' ? 'active' : '' }}"> 
+                        Stocker Reject <i class="fa-solid fa-ticket"></i>
+                    </a>
+                </li>
+            </ul>
+        </li>
+    @endrole
+
+    @role('superadmin')
+        <li class="nav-item">
+            <a href="{{ route('stocker-tools') }}"
+                class="nav-link {{ $routeName == 'stocker-tools' ? 'active' : '' }}" target="_blank">
+                <i class="fa-solid fa-toolbox"></i>
+            </a>
+        </li>
+    @endrole
+@endif
+...
+```
