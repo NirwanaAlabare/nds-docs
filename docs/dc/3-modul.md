@@ -695,6 +695,10 @@ group by
 
 **<u>[Download query dc per-size](/assets/others/query-dc-in.sql)</u>**
 
+### Mutasi DC
+
+Dan untuk kebutuhan reporting mutasinya digunakan query dc per-size dan part_detail. Klik **<u>[disini](/assets/others/dc-mutasi.sql)</u>** untuk mengunduh query mutasi dc. Query tersebut mencakup **semua transaksi di DC dari mulai DC In sampai ke Loading Line**.
+
 ## Secondary Inhouse
 
 Terdapat dua tahap dalam proses secondary inhouse, yaitu **Secondary Inhouse IN** dan **Secondary Inhouse OUT** tapi saat ini **Secondary Inhouse IN belum mandatory**. Maka user hanya perlu **menginput di Secondary Inhouse OUT**. 
