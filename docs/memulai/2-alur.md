@@ -12,6 +12,14 @@ Untuk gambaran alur di lapangan, bisa dilihat di peta produksi berikut :
 
 ![Peta Produksi](/assets/images/production-map.png)
 
+## Alur Proses
+
+Untuk alur proses nya secara detail, bisa dilihat di diagram berikut :
+
+![Peta Produksi](/assets/images/diagram-proses-produksi.jpg)
+
+**<u><a href="/assets/others/diagram-proses-produksi-NAG.drawio" download>Klik disini</a></u>** untuk mengunduh diagram-nya. Diagram diatas berada di Page-2.
+
 ## Struktur Database
 
 Struktur database di project ini masih berkembang. Tapi untuk gambaran umum bisa ditampilkan seperti berikut :
