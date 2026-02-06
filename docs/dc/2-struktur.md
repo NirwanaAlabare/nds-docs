@@ -1,5 +1,5 @@
 ---
-title: Struktur Data
+title: Struktur Data DC
 ---
 
 ![Struktur Database DC](/assets/images/struktur-database-dc.jpg)

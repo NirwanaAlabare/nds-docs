@@ -1,5 +1,5 @@
 ---
-title: List Problem
+title: List Problem Cutting
 ---
 
 Beberapa problem yang belum terselesaikan di Cutting diantaranya :

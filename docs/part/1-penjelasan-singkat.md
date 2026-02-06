@@ -1,5 +1,5 @@
 ---
-title: Penjelasan Singkat
+title: Penjelasan Singkat Part
 ---
 
 Part adalah modul yang digunakan untuk menentukan apa saja bagian-bagian/part dari suatu panel dalam suatu order/style.

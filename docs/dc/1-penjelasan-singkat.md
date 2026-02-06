@@ -1,5 +1,5 @@
 ---
-title: Penjelasan Singkat
+title: Penjelasan Singkat DC
 ---
 
 DC adalah modul yang digunakan untuk memproses **distribusi dari stok panel** hasil dari cutting, dengan cara **scan qr stocker** yang sudah digenerate . 

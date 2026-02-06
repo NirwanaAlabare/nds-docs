@@ -1,5 +1,5 @@
 ---
-title: Modul
+title: Modul DC
 ---
 
 import Tabs from '@theme/Tabs';

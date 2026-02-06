@@ -1,5 +1,5 @@
 ---
-title: Pemakaian Kain
+title: Pemakaian Kain Cutting
 ---
 
 # Pemakaian Kain

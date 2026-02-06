@@ -1,5 +1,5 @@
 ---
-title: Struktur Data
+title: Struktur Data Marker
 ---
 
 Modul Marker memiliki struktur yang cukup simple. Yang hanya berfokus pada tiga tabel berikut.

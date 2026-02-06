@@ -1,5 +1,5 @@
 ---
-title: Alur Cutting-Stocker-DC
+title: Alur Cutting - Stocker - DC
 ---
 
 Sebagai gambaran proses produksi dari Cutting sampai DC bisa dilihat di diagram berikut : 

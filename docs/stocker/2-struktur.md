@@ -1,5 +1,5 @@
 ---
-title: Struktur Data
+title: Struktur Data Stocker
 ---
 
 ## Stocker 

@@ -1,5 +1,5 @@
 ---
-title: Modul
+title: Modul Stocker
 ---
 
 import Tabs from '@theme/Tabs';

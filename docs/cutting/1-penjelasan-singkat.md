@@ -1,5 +1,5 @@
 ---
-title: Penjelasan Singkat
+title: Penjelasan Singkat Cutting
 ---
 
 Cutting merupakan modul yang cukup rumit pada implementasinya. Memiliki banyak langkah dan beberapa rumus untuk mendapatkan output dari cutting. Berikut langkah-langkah yang dilalui untuk mendapatkan output cutting. Berikut beberapa langkahnya :
