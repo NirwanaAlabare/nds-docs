@@ -14,7 +14,7 @@ qty_in = qty_awal - qty_reject + qty_replace
 
 #### 2. secondary_inhouse_input Table
 
-Merupakan tabel untuk menampung data yang masuk ke Secondary Inhouse (Secondary DALAM), Secondary Inhouse adalah proses tambahan bagi part yang terdaftar. Mirip dengan tabel **dc_in_input** tabel ini menampung kolom **id_qr_stocker** sebagai penghubung ke tabel **stocker_input**, dan kolom utamanya adalah **qty_awal, qty_reject dan qty_replace** hanya saja tabel ini memiliki kolom **qty_in** sebagai penampung dari hasilnya, didapat dengan menghitung rumus berikut sebagai qty in dari Secondary Inhouse : 
+Merupakan tabel untuk menampung data yang masuk ke Secondary Inhouse (Secondary DALAM), Secondary Inhouse adalah proses tambahan bagi part yang terdaftar. Mirip dengan tabel **dc_in_input** tabel ini menampung kolom **id_qr_stocker** sebagai penghubung ke tabel **stocker_input**, dan kolom utamanya adalah **qty_awal, qty_reject dan qty_replace** hanya saja tabel ini memiliki kolom **qty_in** sebagai penampung untuk hasilnya, didapat dengan menghitung rumus berikut sebagai qty in dari Secondary Inhouse : 
 ```
 qty_in = qty_awal - qty_reject + qty_replace
 ```
@@ -26,7 +26,7 @@ Terdapat juga tabel **secondary_inhouse_in_input**, hanya saja posisinya masih b
 
 #### 3. secondary_in_input Table
 
-Merupakan tabel untuk menampung data yang masuk ke Secondary IN, Secondary IN adalah proses tambahan setelah Secondary Inhouse ataupun Secondary Luar (Tidak ada modulnya). Mirip dengan tabel **secondary_inhouse_input** tabel ini menampung kolom **id_qr_stocker** sebagai penghubung ke tabel **stocker_input**, dan kolom utamanya adalah **qty_awal, qty_reject dan qty_replace** hanya saja tabel ini memiliki kolom **qty_in** sebagai penampung dari hasilnya, didapat dengan menghitung rumus berikut sebagai qty in dari Secondary Inhouse : 
+Merupakan tabel untuk menampung data yang masuk ke Secondary IN, Secondary IN adalah proses tambahan setelah Secondary Inhouse ataupun Secondary Luar (Tidak ada modulnya). Mirip dengan tabel **secondary_inhouse_input** tabel ini menampung kolom **id_qr_stocker** sebagai penghubung ke tabel **stocker_input**, dan kolom utamanya adalah **qty_awal, qty_reject dan qty_replace** hanya saja tabel ini memiliki kolom **qty_in** sebagai penampung untuk hasilnya, didapat dengan menghitung rumus berikut sebagai qty in dari Secondary Inhouse : 
 ```
 qty_in = qty_awal - qty_reject + qty_replace
 ```
