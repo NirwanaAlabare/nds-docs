@@ -18,7 +18,7 @@ Modul **Master Secondary** adalah tempat dimana data-data dari berbagai proses d
 
 ### Part
 
-**Part** merupakan modul untuk menentukan part apa saja yang digunakan di suatu panel dalam suatu order/style. Part adalah tempat dimana form akan bisa memiliki part-part yang nantinya bisa di-generate **Stocker**-nya. **Form akan otomatis ter-alokasi** ke part yang sesuai dengan order dan panelnya. Namun form juga **dapat dialokasi manual** jika belum masuk ke part group yang diinginkan. Dalam pembuatan part ditentukan juga **consumption** serta **tujuan dan proses alokasinya** sebagai dasar untuk **Distribution Center (DC)**. 
+**Part** merupakan modul untuk menentukan part apa saja yang digunakan di suatu panel dalam suatu order/style. Part adalah tempat dimana form akan bisa memiliki **<u>[part detail](/docs/part/2-.struktur.md#5-part_detail-table)</u>** yang nantinya bisa <u>[di-generate **Stocker**-nya](/docs/stocker/3-modul.md#generate-stocker)</u>. **Form akan otomatis ter-alokasi** ke part yang sesuai dengan order dan panelnya. Namun form juga **dapat dialokasi manual** jika belum masuk ke part group yang diinginkan. Dalam pembuatan part ditentukan juga **consumption** serta **tujuan dan proses alokasinya** sebagai dasar untuk **<u>[Distribution Center (DC)](/docs/dc/3-modul.md#scan-dc)</u>**. 
 
 Contoh data part :
 
