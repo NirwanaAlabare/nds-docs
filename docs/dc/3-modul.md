@@ -1682,6 +1682,7 @@ Setelah suatu proses secondary (secondary dalam (inhouse) ataupun secondary luar
                 // Check Part Detail Secondary
                 $partDetailSecondary = $partDetail->secondaries;
                 if ($partDetailSecondary && $partDetailSecondary->count() > 0) {
+
                     // If there ain't no urutan
                     if ($stocker->urutan == null) {
                         $cekdata = DB::select("
@@ -1746,6 +1747,7 @@ Setelah suatu proses secondary (secondary dalam (inhouse) ataupun secondary luar
 
                         return $cekdata && $cekdata[0] ? json_encode( $cekdata[0]) : null;
                     }
+
                     // If there is urutan
                     else {
 
@@ -2369,15 +2371,126 @@ Setelah suatu proses secondary (secondary dalam (inhouse) ataupun secondary luar
     }
     ```
   </TabItem>
-  <TabItem value="tab2" label="Tab 2">
-    Content for tab 2 goes here.
-  </TabItem>
-  <TabItem value="tab3" label="Tab 3">
-    Content for tab 3 goes here.
+  <TabItem value="saveSecondaryIn" label="Simpan Secondary IN">
+    Setelah stocker di-scan, maka user dapat menentukan qty-nya lalu menyimpan data transaksi dengan klik tombol **Simpan**.
+    ```php title='App\Http\Controllers\DC\SecondaryInController.php'
+    public function store(Request $request)
+    {
+        $tgltrans = date('Y-m-d');
+        $timestamp = Carbon::now();
+
+        $validatedRequest = $request->validate([
+            "txtqtyreject" => "required"
+        ]);
+
+        // Check stocker's availability on secondary in
+        $checkSecondaryIn = SecondaryIn::where("id_qr_stocker", $request->txtno_stocker)->where('urutan', $request->txturutan)->first();
+        if ($checkSecondaryIn) {
+            return array(
+                'status' => 400,
+                'message' => 'Stocker <b>'.$request->txtno_stocker.'</b> '.($request->txturutan ? 'urutan '.$request->txturutan : '').' sudah di scan di secondary in pada tanggal <b>'.$checkSecondaryIn->tgl_trans.'</b>',
+                'redirect' => '',
+                'table' => 'datatable-input',
+                'additional' => [],
+            );
+        }
+
+        // Check if last step of process
+        $lastStep = Stocker::selectRaw("MAX(part_detail_secondary.urutan) as urutan")->
+            leftJoin("part_detail_secondary", "part_detail_secondary.part_detail_id", "=", "stocker_input.part_detail_id")->
+            where("stocker_input.id_qr_stocker", $request['txtno_stocker'])->
+            groupBy("stocker_input.id")->
+            value("urutan");
+
+        // Update Rak/Trolley (One Step Before Loading) On Last Step/No Step at all
+        if (!$lastStep || $lastStep <= $request->txturutan) {
+
+            // Update Rak
+            if ($request['cborak']) {
+                $rak = DB::table('rack_detail')
+                ->select('id')
+                ->where('nama_detail_rak', '=', $request['cborak'])
+                ->get();
+                $rak_data = $rak ? $rak[0]->id : null;
+
+                $insert_rak = RackDetailStocker::create([
+                    'nm_rak' => $request['cborak'],
+                    'detail_rack_id' => $rak_data,
+                    'stocker_id' => $request['txtno_stocker'],
+                    'qty_in' => $request['txtqtyin'],
+                    'created_at' => $timestamp,
+                    'updated_at' => $timestamp,
+                ]);
+            }
+
+            // Update Trolley
+            if ($request['cbotrolley']) {
+                $lastTrolleyStock = TrolleyStocker::select('kode')->orderBy('id', 'desc')->first();
+                $trolleyStockNumber = $lastTrolleyStock ? intval(substr($lastTrolleyStock->kode, -5)) + 1 : 1;
+
+                $trolleyStockArr = [];
+
+                $thisStocker = Stocker::whereRaw("id_qr_stocker = '" . $request['txtno_stocker'] . "'")->first();
+                $thisTrolley = Trolley::where("nama_trolley", $request['cbotrolley'])->first();
+                if ($thisTrolley && $thisStocker) {
+                    $trolleyCheck = TrolleyStocker::where('stocker_id', $thisStocker->id)->first();
+                    if (!$trolleyCheck) {
+                        TrolleyStocker::create([
+                            "kode" => "TLS".sprintf('%05s', ($trolleyStockNumber)),
+                            "trolley_id" => $thisTrolley->id,
+                            "stocker_id" => $thisStocker->id,
+                            "status" => "active",
+                            "tanggal_alokasi" => date('Y-m-d'),
+                        ]);
+                    }
+
+                    $thisStocker->status = "trolley";
+                    $thisStocker->latest_alokasi = Carbon::now();
+                    $thisStocker->save();
+                }
+            }
+        }
+
+        // Save Secondary IN
+        $savein = SecondaryIn::updateOrCreate(
+            ['id_qr_stocker' => $request['txtno_stocker'], 'urutan' => $request->txturutan],
+            [
+                'tgl_trans' => $tgltrans,
+                'qty_awal' => $request['txtqtyawal'],
+                'qty_reject' => $request['txtqtyreject'],
+                'qty_replace' => $request['txtqtyreplace'],
+                'qty_in' => $request['txtqtyawal'] - $request['txtqtyreject'] + $request['txtqtyreplace'],
+                'user' => Auth::user()->name,
+                'ket' => $request['txtket'],
+                'created_at' => $timestamp,
+                'updated_at' => $timestamp,
+            ]
+        );
+
+        // Update Stocker status
+        DB::update(
+            "update stocker_input set status = 'non secondary' ".($request->txturutan ? ", urutan = '".(intval($request->txturutan) + 1)."' " : "")." where id_qr_stocker = '" . $request->txtno_stocker . "'"
+        );
+
+        return array(
+            'status' => 300,
+            'message' => 'Data Sudah Disimpan',
+            'redirect' => '',
+            'table' => 'datatable-input',
+            'additional' => [],
+        );
+    }
+    ```
   </TabItem>
 </Tabs>
 
-## Alur Proses DC
+:::info
+
+Perlu diingat **Secondary IN** dengan **Secondary INHOUSE** merupakan **proses yang berbeda**. Dimana **Secondary INHOUSE** merupakan proses **Secondary DALAM (INHOUSE)**, yaitu proses secondary yang ada dan terjadi didalam. Sementara **Secondary IN** merupakan **penerimaan untuk hasil akhir dari setiap proses Secondary** baik itu dari secondary dalam (inhouse) ataupun secondary luar.   
+
+:::
+
+## Alur Proses Secondary
 
 **"Conditional"** dari fungsi di atas didasarkan pada flowchart berikut :  
 
@@ -2709,6 +2822,8 @@ Ada dua tujuan untuk pengiriman stok trolley, yaitu **trolley** lagi (trolley la
   </TabItem>
   <TabItem value="trolley" label="Send to Trolley">
     ![send-trolley-to-trolley](/assets/images/dc-module/send-trolley-stock-trolley.png)
+
+    Ketika user memasuki halaman Send Trolley Stock, user juga bisa menentukan untuk dikirim ke trolley lain. Setelah user menentukan untuk dikirim ke trolley, akan muncul daftar pilihan trolley yang tersedia, user dapat langsung memilih trolley ataupun meng-scan trolley yang dituju. Setelah trolley tujuan dipilih, selanjutnya user akan memilih stocker bundle mana saja yang akan dialokasi dan user juga akan menentukan no. bon sebagai identitas transaksi.
   </TabItem>
 </Tabs>
 
@@ -3043,14 +3158,12 @@ Ada dua tujuan untuk pengiriman stok trolley, yaitu **trolley** lagi (trolley la
             $fail = [];
             $exist = [];
 
-            // Loading Line Code
             $lastLoadingLine = LoadingLine::select('kode')->orderBy("id", "desc")->first();
             $lastLoadingLineNumber = $lastLoadingLine ? intval(substr($lastLoadingLine->kode, -5)) + 1 : 1;
 
-            // Selected Line
             $lineData = UserLine::where("line_id", $request->line_id)->first();
 
-            // Sub function for Getting Order Data Detail
+            // Get costing Data function
             function getCostingDataTrolley($data, $field) {
                 if (isset($data->masterSbWs)) {
                     switch ($field) {
@@ -3078,16 +3191,14 @@ Ada dua tujuan untuk pengiriman stok trolley, yaitu **trolley** lagi (trolley la
                 return null;
             }
 
+            // When Loading to Line
             if ($request->destination != "trolley") {
-                // Loading Line
                 foreach ($request->selectedStocker as $req) {
                     $loadingStockArr = [];
 
-                    // Selected Stocker
                     $stockerIds = explode(',', $req['stocker_ids']);
                     $stockerIdsStr = addQuotesAround(str_replace(', ', ' \n ', $req['stocker_ids']));
 
-                    // Check Stocker Data
                     $stockerData = Stocker::selectRaw("stocker_input.*, COALESCE(multi_secondary.tujuan, master_secondary.tujuan) as tujuan, dc_in_input.id dc_id, secondary_in_input.id secondary_id, secondary_inhouse_input.id secondary_inhouse_id, multi_secondary.max_urutan, multi_secondary.last_in_id as last_in_id")->
                         leftJoin("part_detail", "part_detail.id", "=", "stocker_input.part_detail_id")->
                         leftJoin("master_secondary", "master_secondary.id", "=", "part_detail.master_secondary_id")->
@@ -3285,7 +3396,10 @@ Ada dua tujuan untuk pengiriman stok trolley, yaitu **trolley** lagi (trolley la
                         }
                     }
                 }
-            } else {
+            }
+
+            // When Moving to another Trolley
+            else {
                 foreach ($request->selectedStocker as $req) {
                     $stockerIds = explode(',', $req['stocker_ids']);
 

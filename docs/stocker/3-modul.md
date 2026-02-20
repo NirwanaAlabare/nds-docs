@@ -504,3 +504,9 @@ Selain tools diatas, ada juga tool **Reorder Stocker Numbering**. Fungsinya untu
 Untuk mengeksekusi tool ini cukup klik tombol **Urutkan Ulang** pada modal pop-up dari detail part di menu part :
 
 ![Reorder Stocker Numbering](/assets/images/stocker-module/reorder-stocker-numbering.png)
+
+## Stocker Build 
+
+![stocker-build](/assets/images/stocker-module/stocker-build.png)
+
+Untuk diagram lengkap figma bisa dicek di **<u>[Alur NDS Figma](https://www.figma.com/board/Tz4RO2HK0G6SgR9bZZJwSa/NDS?node-id=0-1&t=BvV1F13V3Tcf253r-1)</u>**
