@@ -4,6 +4,8 @@ title: "Alur"
 
 # Alur General
 
+## Flow Overview
+
 Project NDS ini memiliki alur yang dinamis, maka sebaiknya aplikasinya juga dibuat agar dapat dinamis/mudah diubah/mudah dirombak. Untuk gambaran umumnya bisa dilihat di link berikut : **<u>[Alur NDS Figma](https://www.figma.com/board/Tz4RO2HK0G6SgR9bZZJwSa/NDS?node-id=0-1&t=BvV1F13V3Tcf253r-1)</u>**
 
 ## Peta Produksi

@@ -28,7 +28,7 @@ Biasanya qty roll yang sesuai dari tabel **scanned_item** adalah **qty sisa kain
 
 ### Roll-Request Entanglement
 
-Ada satu masalah di Cutting yang membuat Reporting jadi sulit dicerna. Karena itu diperlukan suatu relasi yang menghubungkan **Pemakaian Roll (form_cut_input_detail)** dengan **Pengeluaran Gudang (whs_bppb_det)**. Tetapi ada beberapa hal yang perlu dipertimbangkan : 
+Ada satu masalah di Cutting yang membuat Reporting jadi sulit diolah. Karena itu diperlukan suatu relasi yang menghubungkan **Pemakaian Roll (form_cut_input_detail)** dengan **Pengeluaran Gudang (whs_bppb_det)**. Tetapi ada beberapa hal yang perlu dipertimbangkan : 
 
 - **1 kali pemakaian roll bisa didasarkan pada 1 request**. Contoh : 
 
@@ -39,7 +39,7 @@ Ada satu masalah di Cutting yang membuat Reporting jadi sulit dicerna. Karena it
 |RQ-123  | Roll 1     | Form 1     | 50 Meter   |
 |--------|------------|------------|------------|
 |RQ-124  | Roll 2     | Form 2     | 39 Meter   |
-+--------|------------+------------+------------+
++--------+------------+------------+------------+
 ```
 
 - **1 kali pemakaian roll bisa didasarkan pada 2 request**. Contoh : 
@@ -51,7 +51,7 @@ Ada satu masalah di Cutting yang membuat Reporting jadi sulit dicerna. Karena it
 |RQ-123  |            |            |            |
 |--------| Roll 1     | Form 1     | 50 Meter   |
 |RQ-124  |            |            |            |
-+--------|------------+------------+------------+
++--------+------------+------------+------------+
 ```
 Ini adalah kasus yang bisa terjadi ketika gudang mengeluarkan **1 roll secara parsial (lebih dari 1 kali (request))**. Tapi walaupun gudang mengeluarkan secara parsial, cutting tetap memakainya **setelah qty dari roll sudah full (tidak ada sisa di gudang)**.
 
