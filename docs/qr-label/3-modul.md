@@ -125,7 +125,7 @@ public function setMonthCountNumber(Request $request) {
 
 Terkadang ada perubahan data ketika label salah registrasi. Maka dbuatlah modul ini.
 
-![Registration List](/assets/images/year-sequence/registration-list.png)
+![Registration List](/assets/images/year-sequence/modify-year-sequence.png)
 
 User bisa meng-generate ulang struk registrasi ataupun qr label disini. User juga bisa meng-generate **QR Label** sesuai range yang ditentukan, dan kalaupun QR label tersebut belum ter-registrasi, program akan membuat **QR Label mentah** (qr label tanpa spesifikasi produk). Karena biasanya user akan menggenerate qr label secara mentah untuk stock, setelah ada bundle stocker yang siap dialokasi baru user akan registrasikan stocker ke qr label mentah tersebut. 
 
