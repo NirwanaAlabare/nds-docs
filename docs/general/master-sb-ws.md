@@ -2,7 +2,7 @@
 title: Master SB WS
 ---
 
-**Laravel NDS** memiliki satu tabel yang dibuat untuk menampung data master order hingga detailnya dari **signalbit**. Datanya perlu disinkronkan secara rutin. 
+**Laravel NDS** memiliki satu tabel yang dibuat untuk menampung data master order hingga detailnya dari **signalbit**. Datanya perlu disinkronkan secara rutin. Berikut tools yang digunakan untuk menyinkronkan data master_sb_ws.
 
 ## Pentaho Data Integration ( PDI )
 
@@ -81,7 +81,7 @@ PDI akan menarik data dari query diatas lalu disimpan ke tabel yang dituju yaitu
 
 ## User Action
 
-Jika user ingin mengeksekusi (meng-update) data **master_sb_ws**, user bisa mengakses ```Home -> General Tools```
+Jika user ingin memperbarui data **master_sb_ws**, user bisa melakukan stop->start di PDI tapi user juga bisa mengakses ```Home -> General Tools```
 
 ![Home](/assets/images/home-general-tools.png) 
 
