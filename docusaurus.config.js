@@ -159,6 +159,10 @@ const config = {
       },
     }),
     plugins: ["@cmfcmf/docusaurus-search-local"],
+    markdown: {
+      mermaid: true,
+    },
+    themes: ['@docusaurus/theme-mermaid'],
 };
 
 export default config;
