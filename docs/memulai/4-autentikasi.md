@@ -2,6 +2,8 @@
 title: "Autentikasi"
 ---
 
+## Middleware
+
 Untuk pengaturan akses dalam Project ini menggunakan Middleware, seperti ini :
 
 ```php title="app\Http\RoleMiddleware.php"

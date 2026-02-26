@@ -78,4 +78,4 @@ Dan cara untuk memanggilnya di <code>resources/views/...</code> ada di contoh be
 @endsection
 ```
 
-Untuk lebih lengkapnya ada di dokumentasi resmi livewire berikut : [Livewire v2 Docs](https://laravel-livewire.com/docs/2.x/quickstart).
+Untuk lebih lengkapnya ada di dokumentasi resmi livewire berikut : <u>**[Livewire v2 Docs](https://laravel-livewire.com/docs/2.x/quickstart).**</u>
