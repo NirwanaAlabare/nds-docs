@@ -14,6 +14,80 @@ graph LR;
 
 Maka untuk tracking modul, dapat dilakukan dengan memperhatikan hal-hal berikut :
 
+## Views 
+
+Untuk views bisa dicek di ```resource\views\...```. Biasanya akan dikirim **Ajax Request** dari sini. Contoh : 
+
+
+
+```html title='resources\views\stocker\stocker\stocker-reject\stocker-reject.blade.php'
+...
+
+<div>
+    <!-- Javascript Action -->
+    <button type="button" onclick="exportExcel()" class='btn btn-success'><i class="fa fa-file"></i> Export</button>
+</div>
+
+...
+
+<script> 
+
+    ...
+
+    function exportExcel() {
+        Swal.fire({
+            title: "Exporting",
+            html: "Please Wait...",
+            timerProgressBar: true,
+            didOpen: () => {
+                Swal.showLoading();
+            },
+        });
+
+        // 
+        $.ajax({
+            url: "{{ route("export-stocker-reject") }}",
+            type: "post",
+            data: {
+                dateFrom : $("#dateFrom").val(),
+                dateTo : $("#dateTo").val(),
+            },
+            xhrFields: { responseType : 'blob' },
+            success: function (res) {
+                Swal.close();
+
+                iziToast.success({
+                    title: 'Success',
+                    message: 'Success',
+                    position: 'topCenter'
+                });
+
+                var blob = new Blob([res]);
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = "Stocker Reject List "+$("#dateFrom").val()+" - "+$("#dateTo").val()+".xlsx";
+                link.click();
+            },
+            error: function (jqXHR) {
+                Swal.close();
+
+                iziToast.error({
+                    title: 'Error',
+                    message: 'Terjadi Kesalahan',
+                    position: 'topCenter'
+                });
+
+                console.error(jqXHR);
+            }
+        });
+    }
+
+    ...
+
+</script>
+
+```
+
 ## URI
 
 Untuk mendapatkan **nama route**, bisa dengan mengecek endpoint URI dari halaman yang akan dicek.
@@ -154,95 +228,6 @@ protected $routeMiddleware = [
 
 ```
 
-```php routes\web.php
-<?php
+### Controller 
 
-use Illuminate\Support\Facades\Route;
-
-// General
-use App\Http\Controllers\General\GeneralController;
-...
-
-Route::middleware('auth')->group(function () {
-
-    ...
-
-    // General
-    Route::controller(GeneralController::class)->prefix("general")->group(function () {
-        // generate unlock token
-        Route::post('/generate-unlock-token', 'generateUnlockToken')->name('generate-unlock-token');
-        // get order
-        Route::get('/get-order', 'getOrderInfo')->name('get-general-order');
-        // get colors
-        Route::get('/get-colors', 'getColorList')->name('get-general-colors');
-        // get panels
-        Route::get('/get-panels', 'getPanelList')->name('get-general-panels');
-        // get sizes
-        Route::get('/get-sizes', 'getSizeList')->name('get-general-sizes');
-        // get count
-        Route::get('/get-count', 'getCount')->name('get-general-count');
-        // get number
-        Route::get('/get-number', 'getNumber')->name('get-general-number');
-        // get no form
-        Route::get('/get-no-form-cut', 'getNoFormCut')->name('get-no-form-cut');
-        // get group
-        Route::get('/get-form-group', 'getFormGroup')->name('get-form-group');
-        // get stocker
-        Route::get('/get-form-stocker', 'getFormStocker')->name('get-form-stocker');
-
-        // new general
-        // get buyers
-        Route::get('/get-buyers-new', 'getBuyers')->name('get-buyers');
-        // get orders
-        Route::get('/get-orders-new', 'getOrders')->name('get-orders');
-        // get colors
-        Route::get('/get-colors-new', 'getColors')->name('get-colors');
-        // get sizes
-        Route::get('/get-sizes-new', 'getSizes')->name('get-sizes');
-        // get po
-        Route::get('/get-pos', 'getPos')->name('get-pos');
-        // get panels new
-        Route::get('/get-panels-new', 'getPanelListNew')->name('get-panels');
-
-        // General Tools
-        Route::get('/general-tools', 'generalTools')->middleware('role:superadmin')->name('general-tools');
-        Route::post('/update-master-sb-ws', 'updateMasterSbWs')->middleware('role:superadmin')->name('update-master-sb-ws');
-        Route::post('/update-general-order', 'updateGeneralOrder')->middleware('role:superadmin')->name('update-general-order');
-
-        Route::post('/get-general-order-color-from', 'getGeneralOrderColorFrom')->middleware('role:superadmin')->name('get-general-order-color-from');
-        Route::post('/get-general-order-color-to', 'getGeneralOrderColorTo')->middleware('role:superadmin')->name('get-general-order-color-to');
-        Route::post('/update-general-order-color', 'updateGeneralOrderColor')->middleware('role:superadmin')->name('update-general-order-color');
-
-        // get scanned employee
-        Route::get('/get-scanned-employee/{id?}', 'getScannedEmployee')->name('get-scanned-employee');
-
-        // cutting items
-        Route::get('/get-scanned-item/{id?}', 'getScannedItem')->name('get-scanned-form-cut-input');
-        Route::get('/get-item', 'getItem')->name('get-item-form-cut-input');
-
-        // output
-        Route::get('/get-output', 'getOutput')->name('get-output');
-        Route::post('/get-output-post', 'getOutput')->name('get-output-post');
-
-        // master plan
-        Route::get('/get-master-plan', 'getMasterPlan')->name('get-master-plan');
-        Route::get('/get-master-plan-detail/{id?}', 'getMasterPlanDetail')->name('get-master-plan-detail');
-        Route::get('/get-master-plan-output', 'getMasterPlanOutput')->name('get-master-plan-output');
-        Route::get('/get-master-plan-output-size', 'getMasterPlanOutputSize')->name('get-master-plan-output-size');
-
-        // reject in out
-        Route::get('/get-reject-in', 'getRejectIn')->name('get-reject-in');
-        // defect in out
-        Route::get('/get-defect-in-out', 'getDefectInOut')->name('get-defect-in-out');
-
-        // Part Item
-        Route::get('/get-part-item', 'getPartItemList')->name('get-part-item');
-    });
-
-    ...
-
-});
-
-...
-
-```
+Setelah didapatkan **Controller** beserta **Controller Function** dari **Routes**. Maka tinggal dicek Request

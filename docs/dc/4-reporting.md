@@ -203,6 +203,8 @@ ORDER BY
     loading_stock.urutan
 ```
 
+**<u>[Download loading qty query](/assets/others/line-line.sql)</u>**
+
 ## Mutasi DC
 
 Dan untuk kebutuhan reporting mutasinya digunakan query dc per-size dan part_detail. Klik **<u>[disini](/assets/others/dc-mutasi.sql)</u>** untuk mengunduh query mutasi dc. Query tersebut mencakup **semua transaksi di DC dari mulai DC In sampai ke Loading Line**.

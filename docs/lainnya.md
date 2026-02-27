@@ -3,7 +3,7 @@ title: Lainnya
 sidebar_position: 101
 ---
 
-Untuk mengecek task lainnya bisa dengan masuk ke Link Trello Berikut :
+Untuk mengecek problem lain bisa dengan masuk ke Link Trello Berikut :
 **<u>[NDS Trello Link](https://trello.com/invite/b/64f7ff85a17ab01db7243c74/ATTI679067da66294a20c533134b3e4d6f16175C1D43/nds-wip)</u>**
 
 Referensi : 
@@ -19,4 +19,5 @@ SQL File :
 2. **<u><a href="/assets/others/pemakaian-piping.sql" download>Pemakaian Cutting Piping</a></u>** SQL
 2. **<u><a href="/assets/others/pemakaian-kain-union.sql" download>Pemakaian Kain Union</a></u>** SQL
 3. **<u><a href="/assets/others/query-dc-in.sql" download>DC Qty</a></u>** SQL
+3. **<u><a href="/assets/others/loading-line.sql" download>Loading Line</a></u>** SQL
 3. **<u><a href="/assets/others/dc-mutasi.sql" download>Mutasi DC</a></u>** SQL
