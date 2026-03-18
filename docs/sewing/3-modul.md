@@ -5,7 +5,7 @@ title: Modul Sewing
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Setelah stocker panel dialokasi ke Line user akan meregistrasi stocker tersebut menjadi Label QR, Nantinya QR tersebut akan dipasang sesuai spesifikasi produk, Lalu dicek oleh QC dan akhirnya di-scan-lah QR Label tersebut untuk merekam data output dari sewing line secara realtime. 
+Setelah stocker panel dialokasi ke Line user akan meregistrasi stocker tersebut menjadi Label QR, Nantinya QR tersebut akan dipasang sesuai spesifikasi produk, Lalu dicek oleh QC dan akhirnya di-scan QR Label tersebut untuk merekam data output dari sewing line secara realtime. 
 
 
 ## Alur Sewing
@@ -63,3 +63,6 @@ Jika yang dipilih adalah modul **Defect**/**Reject** maka akan muncul dialog unt
 Setelah dipilih jenis dan area defect-nya maka user perlu menentukan juga posisi dari cacat produk. 
 
 ![Defect Position](/assets/images/sewing-module/defect-position.png)
+
+## Tools
+
