@@ -12,4 +12,4 @@ Menggunakan project yang berbeda dengan NDS.
 2. QR Camera <u>[Github](https://github.com/NirwanaAlabare/sb_wip_qr)</u>
 3. Manual <u>[Github](https://github.com/NirwanaAlabare/sb_wip/tree/signalbit)</u>
 
-Project ini dibuat menggunakan **Laravel Livewire**, disertai dengan javascript untuk kebutuhan kustom.
+Project ini dibuat menggunakan **Laravel Livewire**, disertai dengan javascript untuk kebutuhan kustom. Untuk dokumentasi ada di link berikut <u>**[Laravel Livewire v2 Documentation](https://laravel-livewire.com/docs/2.x/quickstart)**</u>. 

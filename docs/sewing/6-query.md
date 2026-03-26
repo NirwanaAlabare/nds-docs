@@ -1,5 +1,5 @@
 ---
-title: Query
+title: Query Sewing
 ---
 
 Beberapa query penting di modul Sewing.
@@ -31,6 +31,8 @@ order by
 limit 
     100
 ```
+
+Query ini merupakan dasar untuk mendapatkan output.
 
 ## Daily Defect by Line, Style and Defect Type Query
 

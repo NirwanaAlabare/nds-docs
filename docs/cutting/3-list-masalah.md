@@ -55,7 +55,7 @@ Ada satu masalah di Cutting yang membuat Reporting jadi sulit diolah. Karena itu
 ```
 Ini adalah kasus yang bisa terjadi ketika gudang mengeluarkan **1 roll secara parsial (lebih dari 1 kali (request))**. Tapi walaupun gudang mengeluarkan secara parsial, cutting tetap memakainya **setelah qty dari roll sudah full (tidak ada sisa di gudang)**.
 
-- **1 kali pemakaian roll bisa didasarkan pada 2 request berbeda**, namun dengan **1 id roll yang sama**. Contoh : 
+- **2 kali pemakaian roll bisa didasarkan pada 2 request berbeda**, namun tetap terhubung karena menggunakan **1 id roll yang sama**. Contoh : 
 
 ```
 +--------+------------+------------+------------+------------+
@@ -66,4 +66,15 @@ Ini adalah kasus yang bisa terjadi ketika gudang mengeluarkan **1 roll secara pa
 |RQ-124  | Roll 1     | Form 2     | 35 Meter   | 0  Meter   |
 +--------+------------+------------+------------+------------+
 ```
+
+```mermaid
+flowchart LR
+  A[RQ_123 = ***25 Meter***] --> 
+  B[Roll_1 += RQ_123 = ***25 Meter***] --> 
+  C[Form_1 = ***15 Meter***] --> 
+  D[Roll_1 -= Form_1 = ***10 Meter***] -->
+  E[RQ_124 = ***25 Meter***] -->
+  F[Roll_1 += RQ_124 = ***35 Meter***] 
+```
+
 Ini adalah kasus yang bisa terjadi ketika gudang mengeluarkan **1 roll secara parsial (lebih dari 1 kali (request))**. Dan cutting pun **memakainya secara parsial** di 2 form yang berbeda.
