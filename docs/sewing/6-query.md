@@ -2,6 +2,36 @@
 title: Query
 ---
 
+Beberapa query penting di modul Sewing.
+
+## Detail Output
+
+Untuk setiap output di sewing memiliki data inti yang menentukan identitas lengkap dari suatu produk dengan detail. Untuk mendapatkan data itu biasa digunakan query dibawah ini : 
+
+```
+select 
+    act_costing.kpno, 
+    act_costing.styleno, 
+    so_det.color, 
+    so_det.size, 
+    output_rfts.created_by, 
+    user_sb_wip.name as created_by_name, 
+    userpassword.username as sewing_line, 
+    output_rfts.created_at, 
+    output_rfts.updated_at 
+from 
+    output_rfts 
+    left join so_det on so_det.id = output_rfts.so_det_id
+    left join so on so.id = so_det.id_so 
+    left join act_costing on act_costing.id = so.id_cost 
+    left join user_sb_wip on user_sb_wip.id = output_rfts.created_by
+    left join userpassword on userpassword.line_id = user_sb_wip.line_id 
+order by 
+    output_rfts.id desc
+limit 
+    100
+```
+
 ## Daily Defect by Line, Style and Defect Type Query
 
 Terkadang user akan meminta suatu data secara custom. Jika data yang diminta adalah data Defect yang di-Grouping berdasarkan **Line**, **Style** dan **Defect Type**. Bisa digunakan Query dibawah ini :

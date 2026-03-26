@@ -56,13 +56,12 @@ Setelah memilih suatu modul maka akan muncul tampilan seperti berikut :
 
 QC akan meng-scan QR Label menggunakan Alat Scan yang disambungkan ke tablet sebagai input, Setiap user meng-scan Label QR, Scanner akan meng-input konten dari QR lalu mengirim data tersebut ke server untuk direkam. Setelah berhasil disimpan Jumlah Qty di List Size akan ter-update. 
 
-Jika yang dipilih adalah modul **Defect**/**Reject** maka akan muncul dialog untuk memilih **Jenis beserta Area dari Defect**
+Jika yang dipilih adalah modul **Defect / Reject** maka akan muncul dialog untuk memilih **Jenis beserta Area dari Defect**
 
 ![Defect](/assets/images/sewing-module/defect.png)
 
-Setelah dipilih jenis dan area defect-nya maka user perlu menentukan juga posisi dari cacat produk. 
+![Reject](/assets/images/sewing-module/reject.png)
+
+Setelah dipilih **jenis dan area defect**-nya maka user perlu menentukan juga posisi dari cacat produk. 
 
 ![Defect Position](/assets/images/sewing-module/defect-position.png)
-
-## Tools
-
