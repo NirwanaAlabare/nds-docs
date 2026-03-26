@@ -10,6 +10,7 @@ graph LR;
     Request-->Route;
     Route-->Controller;
     Controller-->Response;
+    Response-->View;
 ```
 
 Maka untuk tracking modul, dapat dilakukan dengan memperhatikan hal-hal berikut :
@@ -228,6 +229,6 @@ protected $routeMiddleware = [
 
 ```
 
-### Controller 
+## Controller 
 
-Setelah didapatkan **Controller** beserta **Controller Function** dari **Routes**. Maka tinggal dicek Request
+Setelah didapatkan **Controller** beserta **Controller Function** dari **Routes**. Maka tinggal dicek ke file **Controller** dengan function yang sesuai. Disini biasanya business logic disimpan, tetapi terkadang juga ada yang menggunakan **Service** ketika suatu function dapat dipakai dibeberapa tempat sekaligus agar dapat mudah dipanggil. Untuk Service biasanya disimpan di ```app\Services\...```

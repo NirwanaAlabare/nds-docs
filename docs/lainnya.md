@@ -7,7 +7,7 @@ Untuk mengecek problem lain bisa dengan masuk ke Link Trello Berikut :
 **<u>[NDS Trello Link](https://trello.com/invite/b/64f7ff85a17ab01db7243c74/ATTI679067da66294a20c533134b3e4d6f16175C1D43/nds-wip)</u>**
 
 Referensi : 
-1. **<u>[Alur NDS Figma](https://trello.com/invite/b/64f7ff85a17ab01db7243c74/ATTI679067da66294a20c533134b3e4d6f16175C1D43/nds-wip)</u>** Link
+1. **<u>[Alur NDS Figma](https://www.figma.com/board/Tz4RO2HK0G6SgR9bZZJwSa/NDS?node-id=0-1&t=BvV1F13V3Tcf253r-1)</u>** Link
 2. **<u><a href="/assets/others/diagram-proses-produksi-NAG.drawio" download>Diagram Proses Produksi NAG</a></u>** Download 
 3. **<u><a href="/assets/others/NDS-ERD.drawio" download>Database NDS ERD</a></u>** Download
 4. **<u><a href="/assets/others/Sewing-Output-ERDiagram.drawio" download>Database Sewing Output ERD</a></u>** Download
