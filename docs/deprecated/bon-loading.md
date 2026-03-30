@@ -6,4 +6,4 @@ Modul ini dibuat menyerupai cara user menulis bon loading secara manual.
 
 ![Bon Loading](/assets/images/deprecated/bon-loading.png)
 
-Sebagai referensi bisa dicek di ```app\Http\Controllers\DC\BonLoadingController.php```
+Sebagai referensi, kodingannya ada di ```app\Http\Controllers\DC\BonLoadingController.php```
