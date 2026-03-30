@@ -203,7 +203,7 @@ ORDER BY
     loading_stock.urutan
 ```
 
-**<u>[Download loading qty query](/assets/others/line-line.sql)</u>**
+**<u>[Download loading qty query](/assets/others/loading-line.sql)</u>**
 
 ## Mutasi DC
 
