@@ -123,7 +123,7 @@ public function setMonthCountNumber(Request $request) {
 
 ## Modify Year Sequence 
 
-Terkadang ada perubahan data ketika label salah registrasi. Maka dbuatlah modul ini.
+Terkadang ada perubahan data ketika label salah registrasi. Maka dibuatlah modul ini.
 
 ![Registration List](/assets/images/year-sequence/modify-year-sequence.png)
 
