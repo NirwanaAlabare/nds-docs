@@ -32,3 +32,8 @@ Software yang sedang digunakan saat ini :
 - Navicat
 - Github Desktop
 - PDI (Pentaho Data Integration)
+
+#### App List
+
+- Local Portal : **<u>[http://10.10.5.62:8000/app-list](http://10.10.5.62:3000/app-list)</u>** &nbsp; atau &nbsp; **<u>[http://10.10.5.62:8000/app-list](http://10.10.5.62:3000)</u>**
+- Online Portal : **<u>[http://nag.ddns.net:8003/app-list](http://nag.ddns.net:8003/app-list)</u>**
