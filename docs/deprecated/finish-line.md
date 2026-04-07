@@ -11,7 +11,7 @@ Project ini tersimpan di Github dengan link berikut :
 - <b><u>[SB WIP Finish-line](https://github.com/NirwanaAlabare/sb_wip_finish)</u></b>
 - <b><u>[SB WIP Finish-line QR Hardware](https://github.com/NirwanaAlabare/sb_wip_qr_hardware_finish)</u></b>
 
-Sebelum aplikasi untuk input output packing-line diubah menjadi finish-line, terdapat juga aplikasi untuk finish-line dengan modul yang berbeda, yang dimana user hanya bisa menginput Defect, Rework dan Reject. Aplikasi ini juga memiliki modul untuk memilih cara input diantara manual dan scan.
+Sebelum aplikasi untuk input output packing-line diubah menjadi finish-line, terdapat juga aplikasi untuk finish-line dengan modul yang berbeda, yang dimana user hanya bisa menginput Defect, Rework dan Reject. Aplikasi ini juga memiliki modul yang memungkinkan user agar bisa switch cara input diantara manual dan scan.
 
 ![SB WIP Finish-line New](/assets/images/deprecated/finish-line-new.png)
 

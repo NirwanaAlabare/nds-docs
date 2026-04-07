@@ -2,7 +2,11 @@
 title: List Problem Part
 ---
 
-Problem di Part akan berpengaruh ke pembuatan stocker.
+:::info
+
+Problem di Part akan **berpengaruh ke pembuatan stocker**.
+
+:::
 
 ## Panel tidak Sinkron
 
