@@ -20,4 +20,4 @@ Untuk alur proses nya secara detail, bisa dilihat di diagram berikut :
 
 ![Peta Produksi](/assets/images/diagram-proses-produksi.jpg)
 
-**<u><a href="/assets/others/diagram-proses-produksi-NAG.drawio" download>Klik disini</a></u>** untuk mengunduh diagram-nya. Diagram diatas berada di Page-2.
+**<u><a href="nds-docs/assets/others/diagram-proses-produksi-NAG.drawio" download>Klik disini</a></u>** untuk mengunduh diagram-nya. Diagram diatas berada di Page-2.

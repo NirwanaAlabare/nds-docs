@@ -107,7 +107,7 @@ group by
 	b.id
 ```
 
-Query diatas merupakan query untuk mengambil data pemakaian kain dari modul cutting, dengan kolom **qty_in sebagai Qty yang masuk ke Cutting**, **total_pemakaian_roll sebagai Qty yang digunakan Cutting**, **sisa_kain sebagai sisa dari Kain (*Roll*) yang sudah dipakai Cutting** dan **short_roll sebagai selisih dari total_pemakaian_roll dan sisa_kain dengan qty_in**. Dan id_roll sebagai dasar dan identitas dari pemakaian <code>group by id_roll</code>. **<u><a href="/assets/others/pemakaian-cutting.sql" download>Download Pemakaian Cutting Query</a></u>**.
+Query diatas merupakan query untuk mengambil data pemakaian kain dari modul cutting, dengan kolom **qty_in sebagai Qty yang masuk ke Cutting**, **total_pemakaian_roll sebagai Qty yang digunakan Cutting**, **sisa_kain sebagai sisa dari Kain (*Roll*) yang sudah dipakai Cutting** dan **short_roll sebagai selisih dari total_pemakaian_roll dan sisa_kain dengan qty_in**. Dan id_roll sebagai dasar dan identitas dari pemakaian <code>group by id_roll</code>. **<u><a href="nds-docs/assets/others/pemakaian-cutting.sql" download>Download Pemakaian Cutting Query</a></u>**.
 
 ## Pemakaian Kain Piping 
 
@@ -194,7 +194,7 @@ group by
 	form_cut_piping.id
 ```
 
-Query diatas merupakan query untuk mengambil data pemakaian kain dari modul piping, berdasarkan id_roll <code>group by id_roll</code>. **<u><a href="/assets/others/pemakaian-piping.sql" download>Download Pemakaian Piping Query</a></u>**.
+Query diatas merupakan query untuk mengambil data pemakaian kain dari modul piping, berdasarkan id_roll <code>group by id_roll</code>. **<u><a href="nds-docs/assets/others/pemakaian-piping.sql" download>Download Pemakaian Piping Query</a></u>**.
 
 ## Pemakaian Kain Cutting Piece 
 
@@ -283,10 +283,10 @@ GROUP BY
 	form_cut_piece_detail.id
 ```
 
-Query diatas merupakan query untuk mengambil data pemakaian kain dari modul form cutting piece, berdasarkan id_roll <code>group by id_roll</code>. **<u><a href="/assets/others/pemakaian-cutting-piece.sql" download>Download Pemakaian Cutting Piece Query</a></u>**.
+Query diatas merupakan query untuk mengambil data pemakaian kain dari modul form cutting piece, berdasarkan id_roll <code>group by id_roll</code>. **<u><a href="nds-docs/assets/others/pemakaian-cutting-piece.sql" download>Download Pemakaian Cutting Piece Query</a></u>**.
 
 :::info
 
-Query lengkap untuk semua pemakaian bisa dicek di query sql berikut **<u><a href="/assets/others/pemakaian-cutting-union.sql" download>Download Pemakaian Cutting UNION</a></u>**.
+Query lengkap untuk semua pemakaian bisa dicek di query sql berikut **<u><a href="nds-docs/assets/others/pemakaian-cutting-union.sql" download>Download Pemakaian Cutting UNION</a></u>**.
 
 :::

@@ -75,7 +75,7 @@ where
 order by
     tgl_kirim desc, ws asc
 ```
-**<u><a href="/assets/others/master-sb-ws.sql" download>Download Query Master SB WS</a></u>**
+**<u><a href="nds-docs/assets/others/master-sb-ws.sql" download>Download Query Master SB WS</a></u>**
 
 PDI akan menarik data dari query diatas lalu disimpan ke tabel yang dituju yaitu **laravel_nds.master_sb_ws**, dengan metode **scheduler/jadwal**, Saat ini PDI diatur agar mengupdate data setiap 3 jam sekali.
 

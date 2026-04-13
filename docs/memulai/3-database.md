@@ -8,7 +8,7 @@ Struktur database di project ini masih berkembang. Tapi untuk gambaran umum bisa
 
 Berikut struktur database dari NDS secara umum :
 
-**<u><a href="/assets/others/NDS-ERD.drawio" download>Download NDS ERD</a></u>**
+**<u><a href="nds-docs/assets/others/NDS-ERD.drawio" download>Download NDS ERD</a></u>**
 
 ![NDS ERD](/assets/images/NDS-ERD.png)
 
@@ -16,7 +16,7 @@ Berikut struktur database dari NDS secara umum :
 
 Untuk modul-modul di Sewing databasenya dipisahkan dari aplikasi NDS. Secara database menyatu dengan database master (signalbit). Berikut gambaran umumnya, tapi ini bukan versi terbarunya :
 
-**<u><a href="/assets/others/Sewing-Output-ERDiagram.drawio" download>Download Sewing ERD</a></u>**
+**<u><a href="nds-docs/assets/others/Sewing-Output-ERDiagram.drawio" download>Download Sewing ERD</a></u>**
 
 ![Sewing ERD](/assets/images/Sewing-Output-ERDiagram.jpg)
 

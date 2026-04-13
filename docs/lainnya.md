@@ -8,16 +8,16 @@ Untuk mengecek problem lain bisa dengan masuk ke Link Trello Berikut :
 
 Referensi : 
 1. **<u>[Alur NDS Figma](https://www.figma.com/board/Tz4RO2HK0G6SgR9bZZJwSa/NDS?node-id=0-1&t=BvV1F13V3Tcf253r-1)</u>** Link
-2. **<u><a href="/assets/others/diagram-proses-produksi-NAG.drawio" download>Diagram Proses Produksi NAG</a></u>** Download 
-3. **<u><a href="/assets/others/NDS-ERD.drawio" download>Database NDS ERD</a></u>** Download
-4. **<u><a href="/assets/others/Sewing-Output-ERDiagram.drawio" download>Database Sewing Output ERD</a></u>** Download
+2. **<u><a href="/nds-docs/assets/others/diagram-proses-produksi-NAG.drawio" download>Diagram Proses Produksi NAG</a></u>** Download 
+3. **<u><a href="/nds-docs/assets/others/NDS-ERD.drawio" download>Database NDS ERD</a></u>** Download
+4. **<u><a href="/nds-docs/assets/others/Sewing-Output-ERDiagram.drawio" download>Database Sewing Output ERD</a></u>** Download
 
 SQL File :
-1. **<u><a href="/assets/others/master-sb-ws.sql" download>Master SB</a></u>** SQL
-2. **<u><a href="/assets/others/pemakaian-cutting.sql" download>Pemakaian Cutting</a></u>** SQL
-2. **<u><a href="/assets/others/pemakaian-cutting-piece.sql" download>Pemakaian Cutting Piece</a></u>** SQL
-2. **<u><a href="/assets/others/pemakaian-piping.sql" download>Pemakaian Cutting Piping</a></u>** SQL
-2. **<u><a href="/assets/others/pemakaian-kain-union.sql" download>Pemakaian Kain Union</a></u>** SQL
-3. **<u><a href="/assets/others/query-dc-in.sql" download>DC Qty</a></u>** SQL
-3. **<u><a href="/assets/others/loading-line.sql" download>Loading Line</a></u>** SQL
-3. **<u><a href="/assets/others/dc-mutasi.sql" download>Mutasi DC</a></u>** SQL
+1. **<u>[Master SB](/assets/others/master-sb-ws.sql)</u>** SQL
+2. **<u>[Pemakaian Cutting](/assets/others/pemakaian-cutting.sql)</u>** SQL
+2. **<u>[Pemakaian Cutting Piece](/assets/others/pemakaian-cutting-piece.sql)</u>** SQL
+2. **<u>[Pemakaian Cutting Piping](/assets/others/pemakaian-piping.sql)</u>** SQL
+2. **<u>[Pemakaian Kain Union](/assets/others/pemakaian-kain-union.sql)</u>** SQL
+3. **<u>[DC Qty](/assets/others/query-dc-in.sql)</u>** SQL
+3. **<u>[Loading Line](/assets/others/loading-line.sql)</u>** SQL
+3. **<u>[Mutasi DC](/assets/others/dc-mutasi.sql)</u>** SQL
