@@ -761,7 +761,7 @@ Terdapat dua tahap dalam proses secondary inhouse, yaitu **Secondary Inhouse IN*
 
 ![secondary-inhouse-in](/assets/images/dc-module/secondary-inhouse-in.png)
 
-Dalam modul secondary inhouse IN user akan meng-scan stocker yang akan masuk ke Secondary Dalam sesuai dengan alokasi yang ditentukan <u>**[part_detail](/docs/part/2-.struktur.md#5-part_detail)**</u> / <u>**[part_detail_secondary](/docs/part/2-.struktur.md#6-part_detail_secondary-table)**</u> yang terdaftar ke stocker yang di-scan.
+Dalam modul secondary inhouse IN user akan meng-scan stocker yang akan masuk ke Secondary Dalam sesuai dengan alokasi yang ditentukan <u>**[part_detail](/docs/part/2-struktur.md#5-part_detail)**</u> / <u>**[part_detail_secondary](/docs/part/2-struktur.md#6-part_detail_secondary-table)**</u> yang terdaftar ke stocker yang di-scan.
 
 ![create-secondary-inhouse-in](/assets/images/dc-module/create-secondary-inhouse-in.png)
 
