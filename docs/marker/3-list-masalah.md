@@ -10,7 +10,7 @@ Terkadang ketika user sedang membuat data Marker, user akan menemukan select inp
 
 ![PDI](/assets/images/pdi.png)
 
-Gambar diatas adalah tampilan dari aplikasi PDI. Klik icon start untuk mengeksekusi scheduler.
+Gambar diatas adalah tampilan dari aplikasi PDI. Klik icon start untuk mengeksekusi scheduler. Atau dapat juga menggunakan modul yang tersedia di <u>[Master SB WS](/docs/stocker/3-modul.md#stocker-additional)</u> 
 
 ### Multi Order Marker
 
